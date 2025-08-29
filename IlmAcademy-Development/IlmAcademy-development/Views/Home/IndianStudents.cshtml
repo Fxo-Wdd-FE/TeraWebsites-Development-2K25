@@ -1,4 +1,6 @@
-﻿@{
+﻿@using IlmAcademy.ViewModels
+@model PagesViewModel
+@{
     // Set dynamic metadata for the page
     ViewData["Title"] = "Study Abroad Programs for Indian Students | ILM Academy";
     ViewData["Description"] = "Your global journey starts here with ILM Academy. Affordable study abroad programs for Indian students with admission support, visa guidance, scholarships, and pre-departure training.";
@@ -13,8 +15,8 @@
             <div class="row">
                 <div class="col-lg-10 m-auto">
                     <div class="about-banner-content text-center">
-                        <h1 class="mb-15 text-white">Your Global Journey Starts Here</h1>
-                        <p class="text-white">At ILM Academy, we believe education has no borders. Our Study Abroad Program is designed exclusively for Indian students who aspire to pursue higher education overseas.</p>
+                        <h1 class="mb-15 text-white">@Model.ContentTypeSlug.CustomFields.FirstOrDefault(x => x.Description == "Title").Value</h1>
+                        <p class="text-white">@Model.ContentTypeSlug.CustomFields.FirstOrDefault(x => x.Description == "Short Description").Value</p>
                         <div class="mt-4">
                             <a href="/courses" class="ht-btn ht-btn-md">Explore Courses</a>
                             <a href="/apply-online" class="ht-btn ht-btn-md">Apply Now</a>
@@ -31,28 +33,13 @@
             <div class="row">
                 <!-- Left Content -->
                 <div class="col-lg-8 pe-lg-5">
-                    <h2 class="text-body mb-3">Why Study Abroad with ILM Academy?</h2>
-                    <ul class="fs-5 list-style-one mb-4">
-                        <li> Personalized counseling to match your career goals</li>
-                        <li> Partnerships with globally recognized universities & colleges</li>
-                        <li> Affordable and transparent fee structures</li>
-                        <li> Visa and admission support from start to finish</li>
-                        <li> Pre-departure orientation for a confident transition</li>
-                    </ul>
+                    @Html.Raw(Model.ContentTypeSlug.Description)
 
                     <hr class="my-4">
 
-                    <h2 class="text-body mb-3">Admission Requirements</h2>
-                    <ul class="list-style-one">
-                        <li>Academic transcripts & certificates</li>
-                        <li>Valid passport</li>
-                        <li>IELTS/TOEFL (for most countries; waiver possible in some cases)</li>
-                        <li>Admission application form (ILM Academy guidance provided)</li>
-                        <li>Financial documentation for visa purposes</li>
-                    </ul>
+                    @Html.Raw(Model.ContentTypeSlug.OtherDescription)
                 </div>
 
-                <!-- Right Form -->
                 <div class="col-lg-4 ms-auto d-none d-lg-block">
                     <div class="business-solution-form-wrap me-auto ms-auto rounded-0 pt-4 pb-4 rounded-4 bg-white shadow-sm">
                         <div class="contact-title text-center mb-3">
@@ -85,69 +72,45 @@
         </div>
     </section>
 
-    <!-- Programs & Destinations -->
+
     <div id="programs" class="section-space--ptb_70 bg-light">
-        <div class="container">
-            <div class="section-title-wrap text-center mb-5">
-                <h2 class="heading text-body">Programs & Destinations</h2>
-                <p>We offer opportunities to study in leading destinations known for quality education and global exposure:</p>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm p-3">
-                        <h5>United Kingdom (UK)</h5>
-                        <p>Renowned for academic excellence and research</p>
+
+		<div class="container">
+			@foreach (var i in Model.ContentTypeSlug.linkedContentItems)
+			{
+                <div class="section-title-wrap text-center mb-5">
+                    <h2 class="heading text-body">@i.contentTitle</h2>
+                    <p>@Html.Raw(i.description)</p>
+				</div>   }
+                <div class="row g-4">
+                    @foreach (var other in Model.MiscData.ChildContent)
+                    {
+
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow-sm p-3">
+                            <h5>@other.ContentTitle</h5>
+                            <p>@other.ShortDescription</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm p-3">
-                        <h5>Canada</h5>
-                        <p>Affordable education, high-quality universities, and PR pathways</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm p-3">
-                        <h5>Australia</h5>
-                        <p>Strong post-study work opportunities and diverse programs</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm p-3">
-                        <h5>Europe</h5>
-                        <p>Affordable tuition and world-class research options (Germany, France, Netherlands, etc.)</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm p-3">
-                        <h5>USA</h5>
-                        <p>Wide range of universities, innovation, and career prospects</p>
-                    </div>
+                    }
+                   
                 </div>
             </div>
-        </div>
+     
+      
     </div>
 
     <!-- Services Section -->
     <div class="section-space--ptb_70 bg-white">
         <div class="container">
-            <h2 class="heading text-center mb-4">Our Services</h2>
-            <ul class="list-style-one fs-5">
-                <li><b>Career Counseling:</b> Choosing the right country, course, and university</li>
-                <li><b>Application Assistance:</b> Guidance in preparing documents and applying</li>
-                <li><b>Visa Support:</b> Step-by-step help in securing your student visa</li>
-                <li><b>Scholarship Guidance:</b> Finding and applying for available scholarships</li>
-                <li><b>Accommodation Support:</b> Assistance in arranging stay abroad</li>
-                <li><b>Pre-Departure Training:</b> Orientation sessions to prepare for life in a new country</li>
-            </ul>
+            @Html.Raw(Model.ContentTypeSlug.ShortDescription)
         </div>
     </div>
 
     <!-- Why ILM Academy -->
     <div class="section-space--ptb_70 bg-light">
         <div class="container text-center">
-            <h2 class="heading text-body mb-3">Why ILM Academy?</h2>
-            <p class="fs-5">We are more than just a study abroad consultant. As an educational partner, we focus on holistic student success — from preparing you in India to ensuring you thrive abroad.</p>
-            <p class="fs-5">With ILM Academy, you’re not just going abroad to study; you’re building a future.</p>
+            @Html.Raw(Model.ContentTypeSlug.OtherShortDescription)
         </div>
     </div>
 
@@ -155,22 +118,7 @@
     <div class="contact-us-section-wrappaer processing-contact-us-bg section-space--ptb_70">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6 m-auto">
-                    <div class="conact-us-wrap-one">
-                        <h3 class="heading text-body fw-bold">Contact Us Today</h3>
-                        <p class="mt-3">👉 Your future starts here. Let ILM Academy guide you to global success.</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 m-auto">
-                    <div class="contact-info-two text-center">
-                        <h3 class="call-us"><a href="tel:+919901296403">📞 +91-99012 96403</a></h3>
-                        <h6><a href="mailto:ilmacademy20@gmail.com">📧 ilmacademy20@gmail.com</a></h6>
-                        <p>📍 ILM Academy – [Insert Address]</p>
-                        <div class="contact-us-button mt-10">
-                            <a href="/contact-us" class="ht-btn ht-btn-md ht-btn--outline">Enroll or Contact Us</a>
-                        </div>
-                    </div>
-                </div>
+                @Html.Raw(Model.ContentTypeSlug.CustomFields.FirstOrDefault(x => x.Description == "Detail").Value)
             </div>
         </div>
     </div>

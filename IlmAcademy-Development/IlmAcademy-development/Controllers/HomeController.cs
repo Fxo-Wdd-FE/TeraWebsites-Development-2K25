@@ -188,7 +188,12 @@ namespace IlmAcademy.Controllers
         [Route("study-abroad")]
         public IActionResult IndianStudents()
         {
-            return View();
+            var res = _contentRepository.GetWebsiteContentByContentSlug(vm, "study-abroad-9322");
+            var des = _contentRepository.GetWebsiteContentByContentSlug(vm, "programs-destinations-5859");
+            vm.ContentTypeSlug = res.contentItem;
+            vm.MiscData = des.contentItem;
+
+            return View(vm);
         }
 
 
