@@ -165,12 +165,12 @@
                                     </a>
                                 </li>
                                 <li class="item">
-                                    <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="social-link hint--bounce hint--top hint--primary">
+                                    <a href="https://www.facebook.com/ilmacademybangalore" target="_blank" aria-label="Facebook" class="social-link hint--bounce hint--top hint--primary">
                                         <i class="fab fa-facebook-f link-icon"></i>
                                     </a>
                                 </li>
                                 <li class="item">
-                                    <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="social-link hint--bounce hint--top hint--primary">
+                                    <a href="https://www.instagram.com/ilm.academy/" target="_blank" aria-label="Instagram" class="social-link hint--bounce hint--top hint--primary">
                                         <i class="fab fa-instagram link-icon"></i>
                                     </a>
                                 </li>
@@ -193,12 +193,12 @@
                         </div>
 
                         <div class="col-lg-4 col-md-4 col-sm-6 footer-widget">
-                            <h6 class="footer-widget__title mb-20">Courses</h6>
+                            <h6 class="footer-widget__title mb-20">Courses Offered</h6>
                             <ul class="footer-widget__list mt-3">
                                 <li><a href="/courses" class="hover-style-link"><i class="fas fa-graduation-cap me-2"></i>English Diploma</a></li>
                                 <li><a href="/courses" class="hover-style-link"><i class="fas fa-comment-dots me-2"></i>Spoken English</a></li>
-                                <li><a href="/courses" class="hover-style-link"><i class="fas fa-globe me-2"></i>IELTS</a></li>
-                                <li><a href="/courses" class="hover-style-link"><i class="fas fa-language me-2"></i>TOEFL</a></li>
+                                <li><a href="/courses" class="hover-style-link"><i class="fas fa-globe me-2"></i>IELTS Preparation</a></li>
+                                <li><a href="/courses" class="hover-style-link"><i class="fas fa-language me-2"></i>TOEFL Preparation</a></li>
                             </ul>
                         </div>
 
@@ -263,7 +263,7 @@
                             <a href="/about-us"><span><i class="fa-solid fa-user-graduate "></i> About Us</span></a>
                         </li>
                         <li>
-                            <a href="/courses"><span><i class="fa-solid fa-chalkboard-teacher "></i> Courses</span></a>
+                            <a href="/courses"><span><i class="fa-solid fa-chalkboard-teacher "></i> Courses Offered</span></a>
                         </li>
                         <li>
                             <a href="/international-students"><span><i class="fa-solid fa-globe "></i> International Students</span></a>
@@ -374,6 +374,17 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/Form-index',
+                type: 'Get',
+                success: function (response) {
+                    $('#form').html(response);
+                }
+            });
+        });
+    </script>
 
 
 

@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\assets\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AWT_CRM_Repo_v25\AWT_CRM_Repo_v25.csproj" />
   </ItemGroup>
 
