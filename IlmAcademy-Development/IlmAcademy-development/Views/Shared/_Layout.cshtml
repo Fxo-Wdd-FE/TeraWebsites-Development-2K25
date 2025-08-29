@@ -374,6 +374,17 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/Form-index',
+                type: 'Get',
+                success: function (response) {
+                    $('#form').html(response);
+                }
+            });
+        });
+    </script>
 
 
 

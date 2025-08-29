@@ -35,75 +35,9 @@
 
 
                 <div class="col-lg-4 ms-auto d-none d-lg-block">
-                    <div class="business-solution-form-wrap me-auto ms-auto rounded-0 pt-4 pb-4 rounded-4">
-                        <div class="contact-title text-center mb-3">
-                            <h5 class="mb-2">
-                                Let’s Get You Started!
+                   
+                        <div id="form"></div>
 
-                            </h5>
-                            <p class="text ">
-                                Share your info to find the right program
-
-                            </p>
-                        </div>
-                        <form id="contact-form" action="#" method="post">
-                            <div class="contact-form__two">
-                                <!-- Name -->
-                                <div class="contact-inner">
-                                    <input name="con_name" type="text" placeholder="Name *">
-                                </div>
-
-                                <!-- Email -->
-                                <div class="contact-inner">
-                                    <input name="con_email" type="email" placeholder="Email *">
-                                </div>
-
-                                <!-- Phone -->
-                                <div class="contact-inner">
-                                    <input name="con_phone" type="text" placeholder="Phone *">
-                                </div>
-
-                                <!-- Program Dropdown -->
-                                <div class="contact-select">
-                                    <div class="form-item contact-inner">
-                                        <span class="inquiry">
-                                            <select name="program">
-                                                <option disabled selected>Select Course</option>
-                                                <option value="English Diploma">English Diploma</option>
-                                                <option value="Spoken Engish">Spoken English</option>
-                                                <option value="IELTS">IELTS</option>
-                                                <option value="TOEFL">TOEFL</option>
-                                                <option value="TOEIC">TOEIC</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <!-- Country Dropdown -->
-                                <div class="contact-select">
-                                    <div class="form-item contact-inner">
-                                        <span class="inquiry">
-                                            <select name="country">
-                                                <option disabled selected>Select Country</option>
-                                                <option value="India">India</option>
-                                                <option value="UAE">UAE</option>
-                                                <option value="Saudi Arabia">Saudi Arabia</option>
-                                                <option value="Thailand">Thailand</option>
-                                                <option value="Other">Other</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <!-- Submit -->
-                                <div class="comment-submit-btn text-center">
-                                    <button class="ht-btn ht-btn-md w-100" type="submit">Get Free Consultation</button>
-                                    @*   <p class="form-messege"></p> *@
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
                 </div>
 
             </div>
@@ -115,7 +49,7 @@
 
                 <!-- CEO Image -->
                 <div class="col-md-4 text-center mb-4 mb-md-0">
-                    <img src="/assets/images/ceo-ilm.jpg" alt="Message From CEO" class="img-fluid rounded shadow-sm">
+                    <img src="@PagesViewModel.ContentUrl/@Model.ContentTypeSlug.ImageSource" alt="Message From CEO" class="img-fluid rounded shadow-sm">
                 </div>
 
                 <!-- CEO Message Content -->
@@ -124,23 +58,10 @@
                         <h6 class="section-sub-title text-white mb-10">
                             <span class="bg-body ps-2 pe-2">Message from the CEO – ILM Academy, Bengaluru</span>
                         </h6>
-                        <h3 class="heading mb-3">Dear Students and Partners,</h3>
-                        <p class="fs-5">
-                            It is my honor to welcome you to ILM Academy – International Language Management, Bengaluru. Our vision is to equip learners with the language skills, confidence, and cultural awareness needed to thrive in today’s global environment.
-                        </p>
-                        <p class="fs-5">
-                            At ILM Academy, we believe that learning English is more than mastering a language — it is about unlocking new opportunities for education, career, and personal growth. With expert faculty, modern teaching methods, and personalized support, we are committed to guiding every student towards success in English proficiency and beyond.
-                        </p>
-                        <p class="fs-5">
-                            I warmly invite you to be part of our journey and experience how ILM Academy can help you achieve your goals with confidence.
-                        </p>
 
+                        @Html.Raw(Model.ContentTypeSlug?.CustomFields?.FirstOrDefault(x => x.Description == "Detail").Value)
 
-                        <p class="fw-bold mt-3 mb-0">
-                            Warm regards,<br />
-                            Nabila
-                        </p>
-                        <p class="text-muted small">CEO – ILM Academy (International Language Management), Bengaluru</p>
+                        
                     </div>
                 </div>
 
