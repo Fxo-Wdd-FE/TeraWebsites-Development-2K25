@@ -1,0 +1,118 @@
+﻿@using IlmAcademy.ViewModels
+@model PagesViewModel
+@* @{
+    ViewBag.Title = "Blog Detail, Talent Nurtures, Nurturing The Gen-Next!";
+    ViewBag.MetaDescription = "Talent Nurture offers globally recognized online programs, professional diplomas, and certifications designed for career growth, job promotions, and international opportunities.";
+    ViewBag.MetaKeywords = "online education, professional diploma, career development, global certification, job promotions, distance learning, skill-based courses, Talent Nurture, affordable programs, international career opportunities";
+    ViewBag.OgImage = "https://talentnurtures2.mysitedemo.us/assets/images/talent-nurtures.jpg"; 
+    // <-- Update with actual image path
+}
+ *@
+
+<div class="site-wrapper-reveal">
+    <div class="breadcrumb-area" style="background:url(/assets/images/slidebg3.jpg) no-repeat top; background-size:cover; z-index:2; padding-top:45px">
+        <div class="slider-mask">
+        </div>
+
+    </div>
+    <section class="pt-lg-5 pb-lg-5 pt-4 pb-4 ">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 pe-lg-3">
+                    <div class="breadcrumb_box mb-4 border p-4 rounded-4 ">
+
+                        <h1 class="breadcrumb-title text-body fs-1 ">
+                            @Model.ContentTypeSlug?.ContentTitle
+                        </h1>
+
+                    </div>
+                    <div class="responsive-images41 rounded-4 mb-4">
+                        <img src="@PagesViewModel.ContentUrl/@Model.ContentTypeSlug?.ImageSource" class="rounded-4" />
+                    </div>
+
+                    <p class="fs-5">
+                        @Html.Raw(Model.ContentTypeSlug?.Description)
+                    </p>
+                    <p>
+                        @Html.Raw(Model.ContentTypeSlug?.OtherDescription)
+                    </p>
+
+
+                    <blockquote class="bg-light p-4 round-4 ms-0 w-100">
+                        <p class="p1">
+                        @Html.Raw(Model.ContentTypeSlug?.ShortDescription)
+                        </p>
+                    </blockquote>
+                    <p>
+                        @Html.Raw(Model.ContentTypeSlug?.OtherShortDescription)
+                    </p>
+                </div>
+
+
+                <div class="col-lg-4 ms-auto d-none d-lg-block">
+
+                    <div class="border rounded-3 p-4 mb-3" style="border-color:#0d4faf !important
+                    ">
+                        <h5 class="fw-semibold mb-2">
+                            Recent Posts
+
+                        </h5>
+                        <div class="">
+                            <ul class="list-style-one">
+                                <li>
+                                    5 Transformative Impacts of NCC Education in Dubai
+                                </li>
+                                <li>
+                                    NCC Education UAE: Opening Doors to New Opportunities
+                                </li>
+                                <li>
+
+                                    Unlocking Global Opportunities: How TNEI’s NCC Accreditation Opens Doors to 130+ Universities
+
+                                </li>
+                                <li>
+
+                                    5 Benefits of Pursuing UK Degree Programs in Dubai
+
+                                </li>
+                            </ul>
+
+                        </div>
+
+
+                    </div>
+                    <div class="border rounded-3 p-4 mb-3" style="border-color:#0d4faf !important">
+                        <h5 class="fw-semibold mb-2">
+                            Related Articles
+                        </h5>
+                        <div class="">
+
+                            <ul class="list-style-one">
+                                @foreach(var res in Model.ContentTypeSlugs)
+                                {
+                                      <li>
+                                   @res.ContentTitle
+                                </li> 
+                                }
+                             
+                              
+                            </ul>
+
+                        </div>
+
+
+                    </div>
+                    <div class=" mb-3
+">
+                        <img src="@PagesViewModel.ContentUrl/@Model.ContentTypeSlug?.PageHeaderPhoto" class="img-fluid rounded-3" />
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+  
+    </div>

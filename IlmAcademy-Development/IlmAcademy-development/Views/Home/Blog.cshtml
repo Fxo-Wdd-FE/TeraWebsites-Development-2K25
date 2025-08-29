@@ -1,0 +1,85 @@
+﻿@using IlmAcademy.ViewModels
+@model PagesViewModel
+@* @{
+    ViewBag.Title = "Blog, ILM Academy - Master English with Confidence!";
+    ViewBag.MetaDescription = "ILM Academy shares insights, tips, and expert guidance on mastering English. Explore blogs about English Diploma, Spoken English, IELTS, and TOEFL preparation.";
+    ViewBag.MetaKeywords = "English courses, English Diploma, Spoken English, IELTS preparation, TOEFL training, ILM Academy, language learning, study tips, communication skills";
+    ViewBag.OgImage = "/assets/images/ilm-academy-blog.jpg";
+} *@
+<div class="site-wrapper-reveal">
+    <!--============ Blog Hero Start ============-->
+    <div class="breadcrumb-area" style="background:url(/assets/images/slidebg3.jpg) no-repeat top; background-size:cover; z-index:2">
+        <div class="slider-mask"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_box text-center">
+                        <h1 class="breadcrumb-title">ILM Academy Blog</h1>
+                        <p class="text-white">Expert tips & insights to boost your English learning journey</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--============ Blog Hero End ============-->
+    <!--============ Blog Listing Start ============-->
+    <div class="blog-pages-wrapper section-space--ptb_70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 order-lg-2 order-1">
+                    <div class="main-blog-wrap">
+
+                        <!-- Blog 1 -->
+                        @foreach(var i in Model.ContentTypeSlugs)
+                        {
+                            <div class="single-blog-item post-list-wrapper xs-list-blog-item border-bottom">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="post-feature blog-thumbnail rounded-4 responsive-images41">
+                                            <a href="/blog/@i.ContentSlug">
+                                                <img class="img-fluid" src="@PagesViewModel.ContentUrl/@i.ImageSource" alt="English Diploma ILM Academy">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 ps-lg-5">
+                                        <div class="post-info lg-blog-post-info">
+                                            <h4 class="post-title">
+                                                <a href="/blog/@i.ContentSlug">@i.ContentTitle</a>
+                                            </h4>
+                                            <div class="post-meta mt-20">
+                                                <div class="post-date"><span class="far fa-calendar meta-icon"></span> February 2025</div>
+                                                <div class="post-view"><span class="meta-icon far fa-eye"></span> 412 views</div>
+                                            </div>
+                                            <div class="post-excerpt mt-15">
+                                                <p>
+                                                    @Html.Raw(i.CustomFields.FirstOrDefault(s => s.Description == "Short Description").Value)
+                                                </p>
+                                            </div>
+                                            <div class="read-post-share-wrap mt-30">
+                                                <div class="post-read-more">
+                                                    <a href="/blog/@i.ContentSlug" class="ht-btn ht-btn-sm">Read more</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                      
+                        <div class="ht-pagination mt-30 pagination justify-content-center">
+                            <div class="pagination-wrapper">
+                                <ul class="page-pagination">
+                                    <li><a class="prev page-numbers" href="#">Prev</a></li>
+                                    <li><a class="page-numbers current" href="#">1</a></li>
+                                    <li><a class="page-numbers" href="#">2</a></li>
+                                    <li><a class="next page-numbers" href="#">Next</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

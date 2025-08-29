@@ -1,0 +1,368 @@
+﻿@using IlmAcademy.ViewModels
+@model PagesViewModel
+
+
+<div class="site-wrapper-reveal">
+
+
+    <div class="breadcrumb-area" style="background:url(@PagesViewModel.ContentUrl/@Model.ContentTypeSlug?.PageHeaderPhoto) no-repeat top; background-size:cover; z-index:2">
+        <div class="slider-mask"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 m-auto">
+                    <div class="about-banner-content text-center">
+                        <h1 class="mb-15 text-white">
+                            @Html.Raw(Model.ContentTypeSlug.CustomFields.FirstOrDefault(x => x.Description == "Title")?.Value)
+                        </h1>
+                        <p class="text-white">
+                            @Html.Raw(Model.ContentTypeSlug.CustomFields?.FirstOrDefault(x => x.Description == "Short Description")?.Value)
+                        </p>
+                        <div class="mt-4">
+                            <a href="#fees" class="ht-btn ht-btn-md">View Fees</a>
+                            <a href="/apply-online" class="ht-btn ht-btn-md">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="pt-lg-5 pb-lg-5 pt-4 pb-4 bg-light-subtle">
+        <div class="container">
+            <div class="row">
+                <!-- Left Content -->
+                <div class="col-lg-8 pe-lg-5">
+                    @Html.Raw(Model.ContentTypeSlug?.Description)
+
+
+
+                    <hr class="my-4">
+                    @Html.Raw(Model.ContentTypeSlug?.OtherDescription)
+
+
+                </div>
+
+                <!-- Right Form -->
+                <div class="col-lg-4 ms-auto d-none d-lg-block">
+                    <div class="business-solution-form-wrap me-auto ms-auto rounded-0 pt-4 pb-4 rounded-4 bg-white shadow-sm">
+                        <div class="contact-title text-center mb-3">
+                            <h5 class="mb-2">Apply Today</h5>
+                            <p class="text">Fill in your details to begin your journey</p>
+                        </div>
+                        <form id="admissions-form" action="#" method="post">
+                            <div class="contact-form__two">
+                                <!-- Name -->
+                                <div class="contact-inner">
+                                    <input name="con_name" type="text" placeholder="Name *" required>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="contact-inner">
+                                    <input name="con_email" type="email" placeholder="Email *" required>
+                                </div>
+
+                                <!-- Country -->
+                                <div class="contact-inner">
+                                    <input name="con_country" type="text" placeholder="Country *" required>
+                                </div>
+
+                                <!-- Course Dropdown -->
+                                <div class="contact-select">
+                                    <div class="form-item contact-inner">
+                                        <span class="inquiry">
+                                            <select name="course" required>
+                                                <option disabled selected>Select Course</option>
+                                                <option value="Spoken English">Spoken English</option>
+                                                <option value="IELTS Training">IELTS Training</option>
+                                                <option value="Diploma (3 Months)">Diploma (3 Months)</option>
+                                                <option value="Diploma (6 Months)">Diploma (6 Months)</option>
+                                                <option value="Online Classes">Online Classes</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Start Date -->
+                                <div class="contact-inner">
+                                    <input name="start_date" type="date" placeholder="Preferred Start Date">
+                                </div>
+
+                                <!-- Submit -->
+                                <div class="comment-submit-btn text-center">
+                                    <button class="ht-btn ht-btn-md w-100" type="submit">Submit Application</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!--============ Early Bird Offer ============-->
+    <div class="section-space--ptb_70 bg-light text-center">
+        @Html.Raw(Model.ContentTypeSlug?.ShortDescription)
+
+    </div>
+    <div class="about-banner-wrap banner-space about-us-bg position-relative"
+    style="background: url(/assets/images/gallery/students-ilm-academy_07.jpeg) no-repeat center; background-size: cover;">
+        <div class="slider-mask-2"></div>
+        <div class="container pb-4 pt-lg-5 pt-3">
+            <div class="row">
+                <div class="col-lg-11 m-auto">
+                    <div class="about-banner-content text-center">
+                        <h2 class="mb-1 text-white">Our Programs</h2>
+                        <h1 class="text-white mb-4">Flexible Learning Options for Every Student</h1>
+
+                        <div class="text-white row g-4 text-start">
+                            <div class="col-lg-6">
+                                <div class="list-two-inner h-100">
+                                    <h4 class="text-white mb-3">On-Campus Programs</h4>
+                                    @foreach (var i in Model.ContentData?.ChildContent)
+                                    {
+                                        <div class="list-two-inner">
+                                            <h5>@i.Title</h5>
+                                        @i.ShortDescription
+                                    </div>
+                                    }
+                                    
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="list-two-inner h-100">
+                                    <h4 class="text-white mb-3">Online Programs</h4>
+                                    @foreach (var i in Model.MiscData?.ChildContent)
+                                    {
+                                        <div class="list-two-inner">
+                                            <h5>@i.Title</h5>
+                                            @i.ShortDescription
+                                        </div>
+                                    }
+                                   
+                                </div>
+                            </div>
+                        </div> <!-- end row -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--============ Accommodation & Safety ============-->
+    <div class="section-space--ptb_70 bg-light">
+        <div class="our-experience-wrapper">
+            <div class="container">
+                <div class="row align-items-center mt-lg-5 mt-4">
+                    <div class="col-lg-12 m-auto mt-30">
+                        <div class="section-title-wrap text-center section-space--mb_30">
+                            <h3 class="heading">
+                                <span class="text-body fw-bold">Accommodation, Food & Safety</span>
+                            </h3>
+                        </div>
+                        <div class="machine-learning-about-content mt-4 bg-white p-lg-5 p-4 rounded">
+                            <div class="section-title mb-20">
+                                <ul class="list-style-one dec-text">
+                                    <li><b>Safe housing near campus:</b> Comfortable, secure accommodation options for all students.</li>
+                                    <li><b>Halal & international cuisines:</b> Meals catering to MENA, Thai, Korean, and Indian dietary needs.</li>
+                                    <li><b>Airport pickup & drop:</b> Transportation provided on arrival and departure.</li>
+                                    <li><b>Female safety:</b> Female students are accompanied by a manager during transport.</li>
+                                    <li><b>Student support:</b> Orientation and vibrant student life support nearby.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+    <!--============ Fees Section with Tabs ============-->
+    <div id="fees" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="heading text-center mb-5"> Course Fees</h2>
+
+            <!-- Tabs -->
+            <ul class="nav nav-tabs justify-content-center rounded-pill bg-white shadow-sm p-2 mb-4" id="feesTab" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active" id="intl-tab" data-bs-toggle="tab" data-bs-target="#international" type="button" role="tab">
+                        🌍 International (USD)
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="local-tab" data-bs-toggle="tab" data-bs-target="#local" type="button" role="tab">
+                        🇮🇳 Local (INR)
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="feesTabContent">
+
+                <!-- International Fees -->
+                <div class="tab-pane fade show active" id="international" role="tabpanel">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">Spoken English</h5>
+                                    <p class="card-text">2 hrs/day, 5 days/week — <strong>$75</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">IELTS Training</h5>
+                                    <p class="card-text">2 hrs/day — Includes Mock Test — <strong>$220</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">Diploma (3 Months)</h5>
+                                    <p class="card-text">5 days/week — Intensive modules — <strong>$420–$600</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">Diploma (6 Months)</h5>
+                                    <p class="card-text">4–5 hrs/day, 5 days/week — Face-to-face; books & bag; small batch (max 7) — <strong>$1,800</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">Application Fee</h5>
+                                    <p class="card-text">
+                                        One-time — <strong>$100</strong><br />
+                                        <small class="text-muted">Requirements: Higher Secondary Certificate, Passport, Photographs</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">Online Classes (Monthly)</h5>
+                                    <p class="card-text">1 hr/day — <strong>$75/month</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">Online Intensive (3 Months)</h5>
+                                    <p class="card-text">2 hrs/day — <strong>$400</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Local Fees -->
+                <div class="tab-pane fade" id="local" role="tabpanel">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">Spoken English</h5>
+                                    <p class="card-text">2 hrs/day, 5 days/week — <strong>₹6,000</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">IELTS Training</h5>
+                                    <p class="card-text">2 hrs/day — Includes Mock Test — <strong>₹18,000</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">Diploma (3 Months)</h5>
+                                    <p class="card-text">5 days/week — Full curriculum (Grammar, Vocabulary, Reading/Writing, Conversation) — <strong>₹35,000–₹50,000</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">Online English (Monthly)</h5>
+                                    <p class="card-text">1 hr/day — <strong>₹3,999/month</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- end tab content -->
+        </div>
+    </div>
+
+
+
+  
+
+    <div class="contact-us-section-wrappaer processing-contact-us-bg section-space--ptb_70">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Left Column -->
+                <div class="col-lg-6 m-auto">
+                    <div class="conact-us-wrap-one">
+                        <h3 class="heading text-body fw-bold">
+                            Start Your Enrollment or Speak to Our Team
+                        </h3>
+                       @*  <p class="mt-3 text-muted">
+                            We're here to help you start your learning journey. Whether you have questions about our programs,
+                            need guidance on enrollment, or want to visit our campus, feel free to reach out. Our team is ready to support you every step of the way.
+                        </p> *@
+                    </div>
+                </div>
+
+
+                <!-- Right Column -->
+                <div class="col-lg-6 m-auto">
+                    <div class="contact-info-two text-center">
+                        
+
+                        <h3 class="call-us">
+                            <a href="tel:+919901296403">+91-99012 96403</a>
+                        </h3>
+                        @*  <h3 class="call-us">
+                            <a href="mailto:ilmacademy20@gmail.com">ilmacademy20@gmail.com</a>
+                        </h3>
+
+                        <h5 class="text-dark mb-2">Email:</h5> *@
+                        <h6>
+                            <a href="mailto:ilmacademy20@gmail.com">ilmacademy20@gmail.com</a>
+                        </h6>
+                        <p>ILM Academy, Bengaluru, India</p>
+
+                        <div class="contact-us-button mt-10">
+                            <a href="/contact-us" class="ht-btn ht-btn-md ht-btn--outline">
+                                Enroll or Contact Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

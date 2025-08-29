@@ -1,0 +1,326 @@
+﻿@using IlmAcademy.ViewModels
+@model PagesViewModel
+@* @{
+    ViewBag.Title = "Apply Online | ILM Academy – Enroll in English & Professional Courses";
+    ViewBag.MetaDescription = "Apply online at ILM Academy to join our English Diploma, Spoken English, IELTS, TOEFL, TOEIC, and Accent Improvisation courses. Start your journey toward fluency, career growth, and global opportunities.";
+    ViewBag.MetaKeywords = "apply online ILM Academy, online course admission, English diploma application, spoken English enrollment, IELTS registration, TOEFL apply online, TOEIC training application, accent training admission";
+
+} *@
+<style>
+    .footer-area-wrapper {
+    display:none
+    }
+   .other svg{
+        position: absolute;
+        z-index: 1;
+        right: 0;
+    }
+    svg{
+        color:white
+    }
+   .other .input-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+    }
+
+    .form-control, .form-select {
+        font-size: 1.1rem;
+        padding-left: 2.5rem;
+    }
+</style>
+
+<div class="site-wrapper-reveal">
+
+    <!--============ Machine learning Hero Start ============-->
+    <div class="breadcrumb-area " style="background:url(/assets/images/slidebg3.jpg) no-repeat top; background-size:cover; z-index:2">
+        <div class="slider-mask">
+        </div>
+        <div class="container ">
+            <div class="row ">
+                <div class="col-12">
+                    <div class="breadcrumb_box mb-4 mb-lg-0 ">
+
+                        <h1 class="breadcrumb-title mb-3">Apply Online</h1>
+                        <p class="text text-white fs-4">
+                            Take the first step towards success with ILM Academy. <br />
+                            Fill out the form below to apply for admission and begin your journey to mastering English and achieving your career goals.
+                        </p>
+
+                        <p class="text text-white fs-5">
+                            Our admissions team will review your application and get in touch with you shortly.
+                        </p>
+                    </div>
+                </div>
+
+                <section class="pt-lg-5  pt-4  ">
+
+                    <div class="container-fluide">
+                        <div class="row position-relative g-4">
+                            <div class="col-lg-8 pe-lg-3" >
+                                <form asp-action="Confirmation" asp-controller="Home" method="post" enctype="multipart/form-data" class="shadow p-lg-5 p-4 rounded-3 bg-white" id="studentForm" novalidate>
+                                    <div class="application-form__two">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="position-relative mb-3 other">
+													<i class="fa-solid fa-user input-icon"></i>
+													<div class="form-floating">
+														<input asp-for="StudentApplication.StudentName" class="form-control" placeholder="Student Name *" required />
+														<label asp-for="StudentApplication.StudentName">Student Name *</label>
+													</div>
+													<span class="text-danger small d-none" id="StudentNameError">Student name is required</span>
+												</div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="position-relative mb-3 other">
+                                                    <i class="fa-solid fa-phone input-icon"></i>
+                                                    <div class="form-floating">
+                                                        <input asp-for="StudentApplication.PhoneNo" class="form-control" type="tel" placeholder="Phone Number *" required />
+                                                        <label asp-for="StudentApplication.PhoneNo">Phone Number *</label>
+                                                    </div>
+                                                    <span class="text-danger small d-none" id="PhoneError">Phone number is required</span>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                               <div class="col-lg-6">
+                                                <div class="position-relative mb-3 other">
+                                                    <i class="fa-regular fa-id-card input-icon"></i>
+                                                    <div class="form-floating">
+                                                        <input asp-for="StudentApplication.Email" class="form-control" placeholder="Email *" required />
+                                                        <label asp-for="StudentApplication.Email">Email *</label>
+                                                    </div>
+                                                    <span class="text-danger small d-none">Email is required</span>
+                                                </div>
+                                            </div>
+                                             <div class="col-lg-6">
+                                                <div class="position-relative mb-3 other">
+                                                    <i class="fa-regular fa-id-card input-icon"></i>
+                                                    <div class="form-floating">
+                                                        <input asp-for="StudentApplication.StudentNic" class="form-control" placeholder="National ID *" required />
+                                                        <label asp-for="StudentApplication.StudentNic">National ID *</label>
+                                                    </div>
+                                                    <span class="text-danger small d-none">National ID is required</span>
+                                                </div>
+                                            </div>
+                                             <div class="col-lg-6">
+                                                <div class="position-relative mb-3 other">
+                                                    <i class="fa-solid fa-layer-group input-icon"></i>
+                                                    <div class="form-floating">
+                                                        <select asp-for="StudentApplication.StudentCategoryId" class="form-select" required>
+                                                             <option value="" disabled selected></option> 
+                                                            @foreach (var i in Model.StudentCategories)
+                                                            {
+                                                                    <option value="@i.StudentCategoryId">@i.CategoryTitle</option>
+                                                            }
+                                                        </select>
+                                                        <label asp-for="StudentApplication.StudentCategoryId">Student Category *</label>
+                                                    </div>
+                                                    <span class="text-danger small d-none" id="CategoryError">Category is required</span>
+                                                </div>
+                                            </div>
+                                             <div class="col-lg-6">
+                                                <div class="position-relative mb-3 other">
+                                                    <i class="fa-solid fa-user-tie input-icon"></i>
+                                                    <div class="form-floating">
+                                                        <input asp-for="StudentApplication.FatherName" class="form-control" placeholder="Father Name *" required />
+                                                        <label asp-for="StudentApplication.FatherName">Father Name *</label>
+                                                    </div>
+                                                    <span class="text-danger small d-none" id="FatherNameError">Father name is required</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="position-relative mb-3 other">
+                                                    <i class="fa-solid fa-user-tie input-icon"></i>
+                                                    <div class="form-floating">
+                                                        <input asp-for="StudentApplication.FatherEmail" class="form-control" placeholder="Father Email *" required />
+                                                        <label asp-for="StudentApplication.FatherEmail">Father Email *</label>
+                                                    </div>
+                                                    <span class="text-danger small d-none" id="FatherNameError">Father name is required</span>
+                                                </div>
+                                            </div>
+
+                                           
+
+                                           
+                                         
+
+                                            <div class="col-lg-6">
+                                                <div class="position-relative mb-3 other">
+                                                    <i class="fa-regular fa-id-card input-icon"></i>
+                                                    <div class="form-floating">
+                                                        <input asp-for="StudentApplication.FatherNic" class="form-control" placeholder="Father National ID *" required />
+                                                        <label asp-for="StudentApplication.FatherNic">Father National ID *</label>
+                                                    </div>
+                                                    <span class="text-danger small d-none">Father National ID is required</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="position-relative mb-3 other">
+                                                    <i class="fa-regular fa-id-card input-icon"></i>
+                                                    <div class="form-floating">
+                                                        <input asp-for="StudentApplication.FatherMobileNumber" class="form-control" placeholder="Father Mobile Number *" required />
+                                                        <label asp-for="StudentApplication.FatherMobileNumber">Father Mobile Number *</label>
+                                                    </div>
+                                                    <span class="text-danger small d-none">Father Number is required</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="position-relative mb-3 other">
+                                                    <i class="fa-regular fa-id-card input-icon"></i>
+                                                    <div class="form-floating">
+                                                        <input asp-for="StudentApplication.RegistrationNumber" class="form-control" placeholder="Registration Number *" required />
+                                                        <label asp-for="StudentApplication.RegistrationNumber">Registration Number *</label>
+                                                    </div>
+                                                    <span class="text-danger small d-none">Registration Number is required</span>
+                                                </div>
+                                            </div>
+
+                                @*             <div class="col-lg-6">
+                                                <div class="position-relative mb-3 other">
+                                                    <i class="fa-regular fa-id-card input-icon"></i>
+                                                    <div class="form-floating">
+                                                        <input asp-for="StudentApplication.Department" class="form-control" placeholder="Department *" required />
+                                                        <label asp-for="StudentApplication.Department">Department *</label>
+                                                    </div>
+                                                    <span class="text-danger small d-none">Department is required</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="position-relative mb-3 other">
+                                                    <i class="fa-regular fa-id-card input-icon"></i>
+                                                    <div class="form-floating">
+                                                        <input asp-for="StudentApplication.Designation" class="form-control" placeholder="Designation *" required />
+                                                        <label asp-for="StudentApplication.Designation">Designation *</label>
+                                                    </div>
+                                                    <span class="text-danger small d-none">Designation is required</span>
+                                                </div>
+											</div>
+                                            *@
+                                            <div class="col-lg-6">
+                                                <div class="position-relative mb-3 other">
+                                                    <div class="form-floating">
+                                                        <input asp-for="StudentApplication.DateOfBirth" class="form-control" type="date" placeholder="Date of Birth *" required />
+                                                        <label asp-for="StudentApplication.DateOfBirth">Date of Birth *</label>
+                                                    </div>
+                                                    <span class="text-danger small d-none" id="DobError">Date of Birth is required</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="position-relative mb-3 other">
+                                                    <i class="fa-solid fa-hourglass-half input-icon"></i>
+                                                    <div class="form-floating">
+                                                        <input asp-for="StudentApplication.Age" class="form-control" type="number" placeholder="Age *" required />
+                                                        <label asp-for="StudentApplication.Age">Age *</label>
+                                                    </div>
+                                                    <span class="text-danger small d-none" id="AgeError">Age is required</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                       
+                                       
+                                       
+
+                                        <div class="mb-3 other">
+                                            <label class="form-label fw-bold">Remarks</label>
+                                            <textarea asp-for="StudentApplication.Description" class="form-control" rows="3" placeholder="Write something..."></textarea>
+                                        </div>
+
+                                    @*     <div class="mb-3">
+                                            <label class="form-label fw-bold">Upload Student Photo *</label>
+                                            <input asp-for="StudentApplication.Photo" class="form-control" type="file" accept="image/*" required />
+                                        </div>
+ *@
+                                        <div class="text-center mb-3">
+                                            <button class="btn btn-primary btn-lg w-100" type="submit">Submit Application</button>
+                                        </div>
+
+                                        <div class="text-center mt-3">
+                                            <i class="fa-solid fa-circle-info text-primary" style="font-size:1.5rem;" title="Please fill all required fields carefully."></i>
+                                            <p class="small text-muted mt-2">Fields marked with * are mandatory</p>
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                </div>
+
+
+                <div class="col-lg-4 ">
+
+
+                                <div class="single-blog-item blog-grid bg-white shadow " style="height: auto;">
+                            <!-- Post Feature Start -->
+                            <div class="post-feature blog-thumbnail responsive-images62">
+                                <a href="#">
+                                    <img class="img-fluid" src="/assets/images/business-and-management.jpg" alt="Blog Images">
+                                </a>
+                            </div>
+                            <div class="post-info lg-blog-post-info p-4">
+
+
+                                <h2 class="post-title font-weight--bold fs-4">
+                                    <a href="#">@Model.Course.Title</a>
+                                </h2>
+
+                                <div class="post-excerpt mt-0 ">
+                                    <p> @Model.Course.Description</p>
+                                </div>
+                                <div class="mt-2 list-info d-flex align-items-center justify-content-between">
+                                    <ul class="list-unstyled ps-0 mb-0">
+                                        <li class="d-inline-block">
+                                            <img src="/assets/images/lessons.svg" alt="icon"> 2 Lessons
+
+                                        </li>
+                                        <li class="d-inline-block">
+                                            <img src="/assets/images/watch.svg" alt="icon">    4h 30m
+
+                                        </li>
+                                        <li class="d-inline-block">
+                                            <img src="/assets/images/star.svg" alt="icon">  4.8
+
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div> 
+                </div>
+
+            </div>
+        </div>
+    </section>
+            </div>
+        </div>
+    </div>
+   </div>
+    @section Scripts {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <script>
+            document.getElementById("studentForm").addEventListener("submit", function (e) {
+                let valid = true;
+
+                document.querySelectorAll("#studentForm [required]").forEach(input => {
+                    const errorSpan = input.parentElement.parentElement.querySelector(".text-danger");
+                    if (input.value.trim() === "") {
+                        if (errorSpan) errorSpan.classList.remove("d-none");
+                        valid = false;
+                    } else {
+                        if (errorSpan) errorSpan.classList.add("d-none");
+                    }
+                });
+
+                if (!valid) {
+                    e.preventDefault();
+                }
+            });
+        </script>
+    }

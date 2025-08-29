@@ -1,0 +1,207 @@
+﻿@using IlmAcademy.ViewModels
+@model PagesViewModel
+@{
+    var serial = 1;
+    var colors = new[] { "color-one", "color-two", "color-three" };
+}
+<div class="site-wrapper-reveal">
+    <div class="breadcrumb-area" style="background:url(@PagesViewModel.ContentUrl/@Model.ContentTypeSlug?.ImageSource) no-repeat top; background-size:cover; z-index:2">
+        <div class="slider-mask">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_box text-center">
+                        @Html.Raw(Model.ContentTypeSlug?.CustomFields?.FirstOrDefault(x => x.Description == "Title").Value)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="pt-lg-5 pb-lg-5 pt-4 pb-4 bg-light-subtle">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 pe-lg-5">
+                    <p class="fs-5">
+                        @Html.Raw(Model.ContentTypeSlug?.CustomFields?.FirstOrDefault(x => x.Description == "Short Description").Value)
+
+                    </p>
+                    @Html.Raw(Model.ContentTypeSlug?.CustomFields?.FirstOrDefault(x => x.Description == "Long Description").Value)
+
+                </div>
+
+
+
+                <div class="col-lg-4 ms-auto d-none d-lg-block">
+                    <div class="business-solution-form-wrap me-auto ms-auto rounded-0 pt-4 pb-4 rounded-4">
+                        <div class="contact-title text-center mb-3">
+                            <h5 class="mb-2">
+                                Let’s Get You Started!
+
+                            </h5>
+                            <p class="text ">
+                                Share your info to find the right program
+
+                            </p>
+                        </div>
+                        <form id="contact-form" action="#" method="post">
+                            <div class="contact-form__two">
+                                <!-- Name -->
+                                <div class="contact-inner">
+                                    <input name="con_name" type="text" placeholder="Name *">
+                                </div>
+
+                                <!-- Email -->
+                                <div class="contact-inner">
+                                    <input name="con_email" type="email" placeholder="Email *">
+                                </div>
+
+                                <!-- Phone -->
+                                <div class="contact-inner">
+                                    <input name="con_phone" type="text" placeholder="Phone *">
+                                </div>
+
+                                <!-- Program Dropdown -->
+                                <div class="contact-select">
+                                    <div class="form-item contact-inner">
+                                        <span class="inquiry">
+                                            <select name="program">
+                                                <option disabled selected>Select Course</option>
+                                                <option value="English Diploma">English Diploma</option>
+                                                <option value="Spoken Engish">Spoken English</option>
+                                                <option value="IELTS">IELTS</option>
+                                                <option value="TOEFL">TOEFL</option>
+                                                <option value="TOEIC">TOEIC</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Country Dropdown -->
+                                <div class="contact-select">
+                                    <div class="form-item contact-inner">
+                                        <span class="inquiry">
+                                            <select name="country">
+                                                <option disabled selected>Select Country</option>
+                                                <option value="India">India</option>
+                                                <option value="UAE">UAE</option>
+                                                <option value="Saudi Arabia">Saudi Arabia</option>
+                                                <option value="Thailand">Thailand</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Submit -->
+                                <div class="comment-submit-btn text-center">
+                                    <button class="ht-btn ht-btn-md w-100" type="submit">Get Free Consultation</button>
+                                    @*   <p class="form-messege"></p> *@
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="brand-logo-slider-area section-space--ptb_60 bg-light-subtle">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-wrap text-center section-space--mb_30">
+                        <h3 class="heading mb-4">
+                            Our Courses
+                        </h3>
+                    </div>
+
+                    <div class="brand-logo-slider__container-area">
+                        <div class="swiper-container brand-logo-slider__container">
+                            <div class="swiper-wrapper brand-logo-slider__one">
+                                @foreach (var logo in Model.ContentTypeSlug.contentPhotos)
+                                {
+                                    <div class="swiper-slide brand-logo brand-logo--slider">
+                                        <a>
+                                            <div class="brand-logo__image">
+                                                <img src="@($"{PagesViewModel.ContentUrl}/{logo.PhotoSource}")" class="img-fluid" alt="Logo Images" loading="lazy" />
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height:2px; border-bottom:2px dashed #0d4faf"></div>
+        </div>
+
+
+
+        <div class="claim-to-excel-area section-space--pt_70">
+
+            <div class="container">
+
+                <div class="row">
+                    @foreach (var why in Model.ContentTypeSlug.linkedContentItems)
+                    {
+                        <div class="col-lg-10 m-auto">
+                            <div class="section-title-wrap text-center section-space--mb_30">
+                                <h6 class="section-sub-title mb-20">
+                                    @why.contentTitle
+                                </h6>
+                                <h3 class="heading mb-4">
+                                    @Html.Raw(why.description)
+
+                                </h3>
+                                <p class="fs-5">
+                                    @Html.Raw(why.otherDescription)
+                                </p>
+                            </div>
+                        </div>}
+                    <div class="col-lg-12">
+                        <div class="claim-grid-group">
+                            @foreach (var other in Model.MiscData?.ChildContent)
+                            {
+                                var currentColor = colors[(serial - 1) % colors.Length]; // rotate colors
+
+                                <div class="ht-box-icon style-04">
+                                    <div class="icon-box-wrap @currentColor">
+                                        <div class="icon">
+                                            <span class="icon-basic-book"></span>
+                                        </div>
+                                        <div class="content">
+                                            <h6 class="sub-heading">@serial.ToString("D2")</h6>
+                                            <h5 class="heading">@other.Title</h5>
+                                            <p class="mb-0">@other.Description</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                serial++;
+                            }
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+       
+
+
+
+
+    </div>
+   
+    </div>

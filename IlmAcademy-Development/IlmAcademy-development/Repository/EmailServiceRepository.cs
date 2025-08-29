@@ -1,0 +1,118 @@
+﻿using System.Collections.Specialized;
+using System.Net.Mail;
+using System.Net;
+using System.Runtime.Intrinsics.X86;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
+
+namespace EmailServices.Repository
+{
+    public class EmailService
+    {
+        private readonly IConfiguration _config;
+        private IHostingEnvironment _env;
+        private SmtpClient smtpClient;
+        private HttpClientHandler clientHandler;
+        private HttpClient client;
+        private static string emailuser = "noreply@iv4xsgo.com";
+        private static string emailpass = "Tfz3h8%13";
+        private static string emailfrom = "noreply@iv4xsgo.com";
+        private static SmtpClient emailClient = new SmtpClient("mail.businessemailhost.com");
+
+        private static System.Net.NetworkCredential SMTPUserInfo;
+        private static decimal MinimumAmount = 1.00M;
+        private static bool SSL = true;
+        private static int PORT = 587;
+        public string adminmail = "";
+        public EmailService(IConfiguration config, IHostingEnvironment environment, SmtpClient smtpClient)
+        {
+            this.smtpClient = smtpClient;
+            _config = config;
+            _env = environment;
+            emailuser = _config.GetValue<string>("SmtpSettings:Username");
+            emailpass = _config.GetValue<string>("SmtpSettings:Password");
+            emailfrom = _config.GetValue<string>("SmtpSettings:Emailfrom");
+            adminmail = _config.GetValue<string>("SmtpSettings:AdminMail");
+            SMTPUserInfo = new System.Net.NetworkCredential(emailuser, emailpass);
+        }
+        public bool SendEmailWOTs(string to, string subject, string body, NameValueCollection? Parameters = null, string? attachedFilePath = null)
+        {
+            if (Parameters != null)
+            {
+                foreach (string item in Parameters.AllKeys)
+                {
+                    body = body.Replace(item, Parameters[item]);
+                }
+            }
+            MailMessage message = new MailMessage(emailfrom, to, subject, body);
+            if (!string.IsNullOrWhiteSpace(attachedFilePath))
+            {
+                var attachment = new Attachment(attachedFilePath.ToString());
+                message.Attachments.Add(attachment);
+            }
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            message.IsBodyHtml = true;
+            emailClient.UseDefaultCredentials = false;
+            emailClient.Credentials = SMTPUserInfo;
+            emailClient.EnableSsl = SSL;
+            emailClient.Port = PORT;
+            emailClient.Send(message);
+            return true;
+        }
+        public bool SendEmailWOTsWithAttchedFile(
+            string to,
+            string subject,
+            string body,
+            NameValueCollection? Parameters = null,
+            byte[]? attachedFileData = null,
+            string? fileName = null)
+        {
+            if (Parameters != null)
+            {
+                foreach (string item in Parameters.AllKeys)
+                {
+                    body = body.Replace(item, Parameters[item]);
+                }
+            }
+
+            MailMessage message = new MailMessage(emailfrom, to, subject, body);
+
+            if (attachedFileData != null && attachedFileData.Length > 0)
+            {
+                string mimeType = "application/octet-stream"; 
+                string fileExtension = Path.GetExtension(fileName)?.ToLower();
+
+                if (fileExtension == ".pdf")
+                {
+                    mimeType = "application/pdf";
+                }
+                else if (fileExtension == ".jpg" || fileExtension == ".jpeg")
+                {
+                    mimeType = "image/jpeg";
+                }
+                else if (fileExtension == ".png")
+                {
+                    mimeType = "image/png";
+                }
+                else if (fileExtension == ".gif")
+                {
+                    mimeType = "image/gif";
+                }
+                var attachment = new Attachment(new MemoryStream(attachedFileData), fileName ?? "attachment", mimeType);
+
+                message.Attachments.Add(attachment);
+            }
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            message.IsBodyHtml = true;
+            emailClient.UseDefaultCredentials = false;
+            emailClient.Credentials = SMTPUserInfo;
+            emailClient.EnableSsl = SSL;
+            emailClient.Port = PORT;
+            emailClient.Send(message);
+
+            return true;
+        }
+
+
+    }
+}

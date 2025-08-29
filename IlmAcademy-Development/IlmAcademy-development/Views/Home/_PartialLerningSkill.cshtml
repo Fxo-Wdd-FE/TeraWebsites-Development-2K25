@@ -1,0 +1,75 @@
+﻿@using IlmAcademy.ViewModels
+@model PagesViewModel
+<div class="technology-service-area technology-service-bg section-space--ptb_60">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-11 m-auto">
+
+                <div class="row">
+                    <div class="col-lg-8 m-auto">
+                        <div class="section-title pb-4 text-center">
+                            <p class="text-white fw-bold text-uppercase fs-5 mb-0">
+                                @Model.ContentTypeSlug?.ContentTitle
+                            </p>
+                            <h3 class="text-white">
+                                @Html.Raw(Model.ContentTypeSlug.CustomFields?.FirstOrDefault(x => x.Description == "Short Description").Value)
+
+                            </h3>
+                        </div>
+                    </div>
+                    @foreach(var i in Model.ContentTypeSlug.ChildContent)
+                    {
+                        <div class="col-lg-6">
+                            <div class="delivering-optimal-wrap">
+                                <div class="list-item">
+                                    <img src="/assets/images/career-focus2.png" alt="Career Growth at ILM Academy" />
+                                    <div class="title-wrap">
+                                        <h5 class="title"> @i.Title </h5>
+                                        <div class="desc fs-5">
+                                           @i.Description
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+               
+@* 
+                    <div class="col-lg-6">
+                        <div class="delivering-optimal-wrap">
+                            <div class="list-item">
+                                <img src="/assets/images/cost-savings2.png" alt="Affordable English Learning at ILM Academy" />
+                                <div class="title-wrap">
+                                    <h5 class="title"> Affordable Learning </h5>
+                                    <div class="desc fs-5 fw-600">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> *@
+
+                    <div class="col-12 mt-4">
+                        <div class="single-button-group">
+                            <div class="button-group-wrap mt-30 mb-30 text-center">
+                                <a href="/courses" class="ht-btn ht-btn-md ht-btn--outline outline-white fs-4">
+                                    Explore Our Courses
+                                </a>
+                            </div>
+                            <div class="button-group-wrap mt-30 mb-30 text-center">
+                                <a href="/international-students" class="ht-btn ht-btn-md ht-btn--outline outline-white fs-4">
+                                    View  International Students Program
+                                </a>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

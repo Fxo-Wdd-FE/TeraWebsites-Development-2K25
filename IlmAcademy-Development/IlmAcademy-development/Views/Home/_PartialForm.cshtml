@@ -1,0 +1,193 @@
+﻿@using IlmAcademy.ViewModels
+@model PagesViewModel
+
+<div class="business-solution-form-wrap me-auto ms-auto rounded-0 pt-4 pb-4 rounded-4" id="hide">
+    <!-- Success message inside form -->
+    <div id="successMsg" class="success-message">
+        <span class="checkmark">✔</span> Form submitted successfully!
+    </div>
+
+    <div class="contact-title text-center mb-3">
+        <h5>Let’s Get You Started!</h5>
+        <p class="text">Share your info to find the right program</p>
+    </div>
+    <div id="loader" class="form-loader">
+        <div class="spinner"></div>
+    </div>
+    <form id="conform" action="#" method="post">
+        <div class="contact-form__two">
+            <div class="contact-inner">
+                <input id="name" name="con_name" type="text" placeholder="Name *" required>
+            </div>
+
+            <div class="contact-inner">
+                <input id="email" name="con_email" type="email" placeholder="Email *" class="from-control" required>
+            </div>
+
+            <div class="contact-inner" style="display: flex; align-items: center; gap: 5px;">
+                <select id="countryCode" name="country_code" style="padding: 5px; border: 1px solid #ccc; border-radius: 4px; width: 79px;" required>
+                    @if (Model?.Countries != null)
+                    {
+                        foreach (var i in Model?.Countries)
+                        {
+                            <option value="@i.CountryId">@i.CallingCode</option>
+                        }
+                    }
+                </select>
+
+                <input id="phoneNumber" name="con_phone" type="text" placeholder="Phone *" style="flex:1; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"required>
+            </div>
+       
+            <div class="contact-select">
+                <div class="form-item contact-inner">
+                    <span class="inquiry">
+                        <select id="product" name="program" required>
+                            <option disabled selected>Select Course</option>
+                            @if (Model?.Products != null)
+                            {
+                                foreach (var i in Model?.Products)
+                                {
+                                    <option value="@i.ProductId">@i.ProductName</option>
+                                }
+                            }
+                        </select>
+                    </span>
+                </div>
+            </div>
+
+            <div class="contact-select">
+                <div class="form-item contact-inner">
+                    <span class="inquiry">
+                        <select id="opportunityType" name="country" required>
+                            <option disabled selected>Select Types</option>
+                            @if (Model?.OpportunityTypes != null)
+                            {
+                                foreach (var i in Model?.OpportunityTypes)
+                                {
+                                    <option value="@i.OpportunityTypeId">@i.Title</option>
+                                }
+                            }
+                        </select>
+                    </span>
+                </div>
+            </div>
+
+            <div class="comment-submit-btn text-center">
+                <button class="ht-btn ht-btn-md w-100" type="submit">Get Free Consultation</button>
+            </div>
+        </div>
+    </form>
+
+  
+</div>
+
+<style>
+    .success-message {
+        display: none;
+        background: #e9f9f1;
+        border: 1px solid #27ae60;
+        color: #27ae60;
+        padding: 6px 10px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        font-size: 13px;
+        text-align: center;
+    }
+
+        .success-message .checkmark {
+            font-size: 16px;
+            margin-right: 5px;
+        }
+
+    .form-loader {
+        display: none;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .spinner {
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #3498db;
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        animation: spin 1s linear infinite;
+        margin: auto;
+    }
+    @@keyframes spin {
+        0%
+
+    {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+    }
+    #loader{
+        display: none; /* 👈 ye add karo */
+        position: relative;
+        z-index: 1;
+        width: 100px;
+        height: 100px;
+        border: 3px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 3px solid #f70b0b;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+        left: 32%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(function () {
+        $("#conform").submit(function (e) {
+            e.preventDefault();
+            let name = $("#name").val().trim();
+            let email = $("#email").val().trim();
+            let countryCode = $("#countryCode").val();
+            let phoneNumber = $("#phoneNumber").val().trim();
+            let product = $("#product").val();
+            let opportunityType = $("#opportunityType").val();
+
+            $("#loader").show();
+
+            $.ajax({
+                url: "/submitform",
+                type: "POST",
+                data: {
+                    Name: name,
+                    Email: email,
+                    CountryCodeId: countryCode,
+                    Mobile: phoneNumber,
+                    ProductId: product,
+                    OpportunityTypeId: opportunityType
+                },
+                success: function () {
+                    $("#loader").hide();
+
+                    $("#successMsg").fadeIn();
+
+                    setTimeout(function () {
+                        $("#successMsg").fadeOut();
+                    }, 3000);
+
+                    $("#conform")[0].reset();
+                },
+                error: function () {
+                    $("#loader").hide();
+                    alert("❌ Error sending message. Please try again.");
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,287 @@
+﻿@using IlmAcademy.ViewModels
+@model PagesViewModel
+
+
+@{
+    ViewBag.Title = "ILM Academy Bengaluru And Premier English, IELTS, TOEFL And Spoken English Courses";
+    ViewBag.MetaDescription = "ILM Academy Bengaluru, English learning Bangalore, spoken English course Bangalore, IELTS coaching Bangalore, TOEFL prep Bangalore, TOEIC training Bangalore, accent training Bengaluru, English diploma course Bangalore";
+    ViewBag.MetaKeywords = "Learn English with ILM Academy &#x2014; on-campus in Bengaluru or online worldwide. Affordable fees, halal food nearby, safe airport pickup, materials included.";
+
+    var serial = 1;
+    var colors = new[] { "color-one", "color-two", "color-three" };
+}
+<style>
+    input,select{
+        height:46px !important
+    }
+
+    .contact-inner {
+        margin: 0 0 10px;
+    }
+
+   form .ht-btn.ht-btn-md {
+        font-size: 17px;
+        font-weight: 600;
+       
+        line-height: 41px;
+        height: 46px;
+    }
+</style>
+
+<div class="site-wrapper-reveal">
+    <!--============ Machine learning Hero Start ============-->
+    <div class="machine-learning-hero  position-relative pt-5" style="background:url(/assets/images/bg-1.jpg) no-repeat top; background-size:cover; z-index:2">
+        @* <div class="slider-mask">
+
+        </div> *@
+        <div class="container pt-5">
+            <div class="row align-items-center pt-md-4 pt-3 pb-md-4">
+                <!--baseline-->
+                <div class="col-lg-7 col-md-11 mt-auto mb-auto">
+                    <div class="machine-learning-hero-text wow move-up animated " >
+                        @Html.Raw(Model.ContentTypeSlug.CustomFields?.FirstOrDefault(x => x.Description == "Title").Value)
+                        <p class="text-white ">
+                            @Html.Raw(Model.ContentTypeSlug.CustomFields?.FirstOrDefault(x => x.Description == "Short Description").Value)
+
+                        </p>
+                        <div class="col-12 mb-5">
+                            <div class="feature-images__two small-mt__10 mt-4">
+                                <div class="modern-grid-image-box row gy-3">
+                                     @foreach (var feature in Model.ContentTypeSlugs)
+                                    {
+                                        <div class="single-item col-lg-4 col-md-6 position-relative">
+                                            <a href="/courses" class="ht-box-images style-02 h-100 shadow">
+                                                <div class="image-box-wrap h-100 text-center">
+                                                    <div class="box-image mb-2">
+                                                         <img class="img-fluid" src="@PagesViewModel.ContentUrl/@feature.ImageSource" alt="@feature.Title" />
+                                                     </div>
+                                                    <div class="content mb-1">
+                                                        <h6 class="heading text-dark">@feature.ContentTitle</h6>
+                                                    </div>
+                                                 
+                                                </div>
+                                                <div class="circle-arrow">
+                                                    <div class="middle-dot"></div>
+                                                    <div class="middle-dot dot-2"></div>
+                                                    <i class="fas fa-arrow-right"></i>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    } 
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                     
+                       @*  <div class="hero-button mt-30 flex-wrap pt-lg-3">
+                            <a href="/login" class="ht-btn ht-btn-md me-2 text-nowrap mb-2 d-md-none">Login</a>
+                            <a href="/apply-online" class="ht-btn ht-btn-md me-2 text-nowrap mb-2">Start Your Application</a>
+                           
+                            
+                        </div> *@
+                    </div>
+                    
+                </div>
+
+                <div class="col-lg-4 ms-auto  pb-3">
+				<div id="form"></div>
+
+          
+			</div> 
+			</div> 
+		</div>
+       
+    </div>
+
+    <div class="brand-logo-slider-area section-space--ptb_60 bg-light-subtle">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-wrap text-center section-space--mb_30">
+                        <h3 class="heading mb-4">
+                            Our Courses
+                        </h3>
+                    </div>
+
+                    <div class="brand-logo-slider__container-area">
+                        <div class="swiper-container brand-logo-slider__container">
+                            <div class="swiper-wrapper brand-logo-slider__one">
+                                @foreach (var logo in Model.ContentTypeSlug.contentPhotos)
+                                {
+                                    <div class="swiper-slide brand-logo brand-logo--slider">
+                                        <a>
+                                            <div class="brand-logo__image">
+                                                <img src="@($"{PagesViewModel.ContentUrl}/{logo.PhotoSource}")" class="img-fluid" alt="Logo Images" loading="lazy" />
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height:2px; border-bottom:2px dashed #0d4faf"></div>
+        </div>
+
+
+
+        }
+
+
+
+
+
+    </div>
+  
+    <div id="bangloro"></div>
+
+    <div class="claim-to-excel-area section-space--pt_70 pb-5">
+
+        <div class="container">
+
+            <div class="row">
+                @foreach (var why in Model.ContentTypeSlug.linkedContentItems)
+                {
+                    <div class="col-lg-10 m-auto">
+                        <div class="section-title-wrap text-center section-space--mb_30">
+                            <h6 class="section-sub-title mb-20">
+                                @why.contentTitle
+                            </h6>
+                            <h3 class="heading mb-4">
+                                @Html.Raw(why.description)
+
+                            </h3>
+                            <p class="fs-5">
+                                @Html.Raw(why.otherDescription)
+                            </p>
+                        </div>
+                    </div>
+                }
+                <div class="col-lg-12">
+                    <div class="claim-grid-group">
+                        @foreach (var other in Model.MiscData?.ChildContent)
+                        {
+                            var currentColor = colors[(serial - 1) % colors.Length]; 
+
+                            <div class="ht-box-icon style-04">
+                                <div class="icon-box-wrap @currentColor">
+                                    <div class="icon">
+                                        <span class="icon-basic-book"></span>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="sub-heading">@serial.ToString("D2")</h6>
+                                        <h5 class="heading">@other.Title</h5>
+                                        <p class="mb-0">@other.Description</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            serial++; 
+                        }
+
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+	<div id="skil"></div>
+
+    <div id="testim"></div>
+
+
+
+    <div class="contact-us-section-wrappaer infotechno-contact-us-bg section-space--ptb_80">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="conact-us-wrap-one">
+                        <b class="bg-body text-white ps-2 pe-2 rounded d-inline-block pt-1 pb-1 mb-3">
+                            Exclusive Admissions Offer
+                        </b>
+                        <h3 class="heading">
+                            Enroll Now –
+                            <span class="text-body">Unlock Scholarships & Early-Bird Discounts</span>
+                        </h3>
+
+                        <div class="sub-heading">
+                            Secure your seat today and enjoy up to <b>30% off</b> tuition fees for the upcoming academic session.
+                            Hurry, limited seats available!
+                        </div>
+                        <div class="contact-us-button mt-20 ms-sm-4 ps-sm-2">
+                            <a href="/apply" class="btn btn--secondary ht-btn-md mb-2">
+                                Apply for Scholarship
+                            </a>
+                            <a href="/contact-us" class="btn btn--secondary ht-btn-md mb-2">
+                                Get In Touch
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="contact-info-one text-center">
+                        <div class="icon">
+                            <img src="/assets/images/enroll-now.jpeg"width="300" alt="ILM Academy Scholarship" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/ilm-bangloro',
+            type: 'GET',
+            success: function (response) {
+                $('#bangloro').html(response);
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/skills',
+            type: 'GET',
+            success: function (response) {
+                $('#skil').html(response);
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/testimonials',
+            type: 'GET',
+            success: function (response) {
+                $('#testim').html(response);
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/Form-index',
+            type: 'Get',
+            success: function (response) {
+                $('#form').html(response);
+            }
+        });
+    });
+</script>
