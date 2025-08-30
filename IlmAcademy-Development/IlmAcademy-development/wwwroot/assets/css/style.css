@@ -14982,3 +14982,35 @@ input, textarea, select{
     }
 }
 
+.social-icon {
+    -webkit-box-shadow: 0 20px 80px rgb(0 0 0 / 53%) !important;
+    box-shadow: 0 20px 80px rgb(0 0 0 / 53%) !important;
+    background: #00cd40;
+    border-radius: 100px;
+    position: fixed;
+    bottom: 30px;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 65px;
+    left: 20px;
+    z-index: 3
+}
+
+    .social-icon:after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        background: #fff;
+        position: absolute;
+        border-radius: 100px
+    }
+
+    .social-icon i {
+        color: #fff;
+        font-size: 43px;
+        font-family: 'Font Awesome 5 Brands';
+        font-style: normal;
+        font-weight: 100;
+        line-height: 61px;
+    }
