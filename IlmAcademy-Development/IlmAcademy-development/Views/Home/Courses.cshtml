@@ -8,7 +8,15 @@
     // <-- Update with actual image path
 } *@
 
-
+<style>
+    .text-truncate-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Limit to 2 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
 <div class="site-wrapper-reveal">
     <!--============ Machine learning Hero Start ============-->
     <div class="breadcrumb-area" style="background:url(/assets/images/background.webp) no-repeat top; background-size:cover; z-index:2">
@@ -49,8 +57,8 @@
                                 <h2 class="post-title font-weight--bold fs-4">
                                     <a href="/course-details/@i.ActivityCourseId">@i.Title</a>
                                 </h2>
-                                <div class="post-excerpt mt-0">
-                                    <p>@i.Description</p>
+                                <div class="post-excerpt mt-0 text-truncate-2">
+                                    @Html.Raw(i.Description)
                                 </div>
                             </div>
                         </div>
