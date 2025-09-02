@@ -18,8 +18,8 @@
                         <h1 class="mb-15 text-white">@Model.ContentTypeSlug.CustomFields.FirstOrDefault(x => x.Description == "Title").Value</h1>
                         <p class="text-white">@Model.ContentTypeSlug.CustomFields.FirstOrDefault(x => x.Description == "Short Description").Value</p>
                         <div class="mt-4">
-                            <a href="/courses" class="ht-btn ht-btn-md">Explore Courses</a>
-                            <a href="/apply-online" class="ht-btn ht-btn-md">Apply Now</a>
+                            @* <a href="/courses" class="ht-btn ht-btn-md">Explore Courses</a> *@
+                            <a href="/apply-online/1" class="ht-btn ht-btn-md">Apply Now</a>
                         </div>
                     </div>
                 </div>
