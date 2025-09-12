@@ -64,7 +64,7 @@
                     <div class="col-lg-12">
                         <div class="header position-relative justify-content-between d-flex">
                             <div class="logo-area">
-                                <div class="logo" style="width:200px">
+                                <div class="logo" style="width:250px">
                                     <a href="/">
                                         <img src="@PagesViewModel.ContentUrl/@PagesViewModel.websiteSettingsValue?.WebsiteLogo" aria-label="Logo" class="img-fluid light-logo rounded" alt="">
 
@@ -72,7 +72,7 @@
                                 </div>
 
                             </div>
-                            <div class="header-midle-box menu-style-four">
+                            <div class="header-midle-box menu-style-four d-flex">
                                 <div class="header-bottom-wrap d-md-block d-none">
                                     <div class="header-bottom-inner">
                                         <div class="header-bottom-left-wrap">
@@ -80,9 +80,9 @@
                                                 <nav class="navigation-menu primary--menu">
 
                                                     <ul>
-                                                        <li class="active">
+                                                        @*  <li class="active">
                                                             <a href="/"><span><i class="fa-solid fa-house d-block"></i> Home</span></a>
-                                                        </li>
+                                                        </li> *@
                                                         <li>
                                                             <a href="/about-us"><span><i class="fa-solid fa-user-graduate d-block"></i> About Us</span></a>
                                                         </li>
@@ -93,7 +93,7 @@
                                                             <a href="/gallery"><span><i class="fa-solid fa-images d-block"></i> Gallery</span></a>
                                                         </li>
                                                         <li>
-                                                            <a href="/international-students"><span><i class="fa-solid fa-globe d-block"></i> International<br /> Students</span></a>
+                                                            <a href="/international-students"><span><i class="fa-solid fa-passport d-block"></i> International<br /> Students</span></a>
                                                         </li>
                                                         <li>
                                                             <a href="/study-abroad"><span><i class="fa-solid fa-globe d-block"></i> Study<br /> Abroad</span></a>
@@ -101,18 +101,25 @@
                                                         <li>
                                                             <a href="/contact-us"><span><i class="fa-solid fa-envelope-open-text d-block"></i> Contact Us</span></a>
                                                         </li>
-
-                                                        <button class="ht-btn-lang ht-btn-md" onclick="translatePage('en')">EN</button>
-                                                        <button class="ht-btn-lang ht-btn-md" onclick="translatePage('ar')">AR</button>
+                                                        <li>
 
                                                     </ul>
+
 
                                                 </nav>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div>
+                                    <button class="ht-btn-lang ht-btn-md notranslate" onclick="translatePage('en')">EN</button>
 
+                                    <button class="ht-btn-lang ht-btn-md notranslate" onclick="translatePage('ar')">AR</button>
+
+                                </div>
+
+
+                                <div id="google_translate_element" style="display:none;"></div>
                             </div>
                             <div class="">
                                 <!-- navigation menu -->
