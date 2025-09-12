@@ -177,6 +177,7 @@ namespace IlmAcademy.ViewModels
         public string? LevelTitle { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
+        public string? LongDescription { get; set; }
         public string? ShortName { get; set; }
         public string? BranchId { get; set; }
         public int? Avtive { get; set; }
