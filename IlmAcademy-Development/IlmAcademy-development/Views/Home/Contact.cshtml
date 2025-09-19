@@ -1,9 +1,11 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Contact ILM Academy Bangalore – Get in Touch Today";
     ViewBag.MetaDescription = "Contact ILM Academy Bangalore for admissions, course details, or general inquiries. Reach us to learn more about our Spoken English, IELTS, TOEFL, TOEIC, and English Diploma programs.";
     ViewBag.MetaKeywords = "ILM Academy Bangalore contact, English courses Bangalore, IELTS coaching Bangalore, TOEFL training Bangalore, Spoken English classes, TOEIC preparation, English Diploma Bangalore, admission inquiry";
     ViewBag.OgImage = "https://ilmacademybangalore.com/assets/images/contact-banner.jpg";
     // <-- Replace with actual contact page banner image
+    Layout = "/Views/Shared/_Layout.cshtml";
 }
 
 <div class="site-wrapper-reveal">
@@ -30,68 +32,139 @@
 
     <!--====================  brand logo slider area ====================-->
     <div class="contact-us-section-wrappaer section-space--ptb_70 ">
+     
+
         <div class="container">
             <div class="row">
+                <!-- Contact Header -->
                 <div class="col-12">
                     <div class="contact-us-wrap-one mb-30 text-center">
                         <h3 class="heading">
                             To make requests for further information, <br>
                             <span class="text-body">contact us</span> via our social channels.
                         </h3>
-                        <p class="sub-heading">
-                            We usually respond within a few hours! <br>
-                            No more than <strong>2 working days</strong> after receiving your inquiry.
-                        </p>
+                    
                     </div>
                 </div>
 
                 <!-- Contact Info -->
                 <div class="col-lg-5 mb-4 mb-lg-0">
                     <div class="contact-info-wrap bg-light h-100 rounded-3 p-lg-5 p-4 shadow-sm">
-                        <h5 class="heading mb-3">Address</h5>
-                        <p class="fs-5 mb-4">Bengaluru, India</p>
-                        <hr />
+
+                        <!-- Header -->
+                        <h5 class="heading mb-3">Contact Information</h5>
+                        <hr>
+
+                        <!-- Contact Info List -->
                         <ul class="contact-info__list list-unstyled mt-3">
-                            <li class="mb-2">
-                                <a href="mailto:ilmacademy20@gmail.com" class="fs-5 fw-bold text-dark text-decoration-none">
-                                    <i class="fa-regular fa-envelope-open me-2"></i> ilmacademy20@gmail.com
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://wa.me/919901296403" target="_blank" class="fs-5 fw-semibold text-dark text-decoration-none">
-                                    <i class="fa-brands fa-whatsapp me-2"></i> +91 9901296403
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://wa.me/971588024789" target="_blank" class="fs-5 fw-semibold text-dark text-decoration-none">
-                                    <i class="fa-brands fa-whatsapp me-2"></i> +971 588024789
+
+                            <!-- Email -->
+                            <li class="mb-4">
+                                <a href="mailto:info@ilmacademybangalore.com" class="fs-5 fw-bold text-dark text-decoration-none">
+                                    <i class="fa-regular fa-envelope-open me-2"></i>
+                                    info@ilmacademybangalore.com
                                 </a>
                             </li>
 
+                            <!-- India Contact -->
+                            <li class="mb-1 text-muted small fw-semibold">
+                                Bengaluru, India
+                            </li>
+                            <li class="mb-4">
+                                <a href="https://wa.me/919901296403" target="_blank" class="fs-5 fw-semibold text-dark text-decoration-none">
+                                    <i class="fa-brands fa-whatsapp me-2"></i>
+                                    +91 9901296403
+                                </a>
+                            </li>
+
+                            <!-- UAE Contact -->
+                            <li class="mb-1 text-muted small fw-semibold">
+                                Dubai, UAE
+                            </li>
+                            <li>
+                                <a href="https://wa.me/971588024789" target="_blank" class="fs-5 fw-semibold text-dark text-decoration-none">
+                                    <i class="fa-brands fa-whatsapp me-2"></i>
+                                    +971 588024789
+                                </a>
+                            </li>
 
                         </ul>
                     </div>
                 </div>
 
+
+
                 <!-- Contact Form -->
                 <div class="col-lg-7">
                     <div class="contact-form-wrap bg-light h-100 rounded-3 p-lg-5 p-4 shadow-sm">
                         <h5 class="heading mb-3">Send us a Message</h5>
-                        <form id="contact-form" action="#" method="post" novalidate>
+                        <!-- Success message -->
+                        <div id="successMessage" class="success-message">
+                            <span class="checkmark">✔</span> Your message has been sent successfully!
+                        </div>
+
+                        <form id="conform" method="post" novalidate>
                             <div class="contact-form">
                                 <div class="row g-3">
+                                    <!-- Name -->
                                     <div class="col-md-6">
-                                        <input class="form-control" name="con_name" type="text" placeholder="Name *" required>
+                                        <input class="form-control" id="name" name="con_name" type="text" placeholder="Name *" required>
                                     </div>
+
+                                    <!-- Email -->
                                     <div class="col-md-6">
-                                        <input class="form-control" name="con_email" type="email" placeholder="Email *" required>
+                                        <input class="form-control" id="email" name="con_email" type="email" placeholder="Email *" required>
                                     </div>
+
+                                    <!-- Phone with Country Code -->
+                                    <div class="col-12 d-flex gap-2">
+                                        <select id="countryCode" name="country_code" class="form-select" style="max-width: 100px;" required>
+                                            @if (Model?.Countries != null)
+                                            {
+                                                foreach (var i in Model?.Countries)
+                                                {
+                                                    <option value="@i.CountryId">@i.CallingCode</option>
+                                                }
+                                            }
+                                        </select>
+
+                                        <input class="form-control flex-grow-1" id="phoneNumber" name="con_phone" type="text" placeholder="Phone *" required>
+                                    </div>
+
+                                    <!-- Course Selection -->
                                     <div class="col-12">
-                                        <input class="form-control" name="con_subject" type="text" placeholder="Subject *" required>
+                                        <select class="form-select" id="product" name="program" required>
+                                            <option disabled selected>Select Course</option>
+                                            @if (Model?.Products != null)
+                                            {
+                                                foreach (var i in Model?.Products)
+                                                {
+                                                    <option value="@i.ProductId">@i.ProductName</option>
+                                                }
+                                            }
+                                        </select>
                                     </div>
+
+                                    <!-- Opportunity Type -->
+                                    <div class="col-12">
+                                        <select class="form-select" id="opportunityType" name="country" required>
+                                            <option disabled selected>Select Types</option>
+                                            @if (Model?.OpportunityTypes != null)
+                                            {
+                                                foreach (var i in Model?.OpportunityTypes)
+                                                {
+                                                    <option value="@i.OpportunityTypeId">@i.Title</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <!-- Message -->
                                     <div class="col-12">
                                         <textarea class="form-control" name="con_message" rows="5" placeholder="Please describe what you need." required></textarea>
                                     </div>
+
+                                    <!-- Submit -->
                                     <div class="col-12 mt-3">
                                         <button class="ht-btn ht-btn-md w-100" type="submit">Submit</button>
                                         <p class="form-message mt-2"></p>
@@ -99,6 +172,7 @@
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -106,3 +180,99 @@
 
     </div>
     </div>
+
+
+
+
+
+
+<style>
+    .success-message {
+        display: none;
+        background: #e9f9f1;
+        border: 1px solid #27ae60;
+        color: #27ae60;
+        padding: 6px 10px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        font-size: 13px;
+        text-align: center;
+    }
+
+        .success-message .checkmark {
+            font-size: 16px;
+            margin-right: 5px;
+        }
+
+    .form-loader {
+        display: none;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .spinner {
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #3498db;
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        animation: spin 1s linear infinite;
+        margin: auto;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    #loader {
+        display: none; /* 👈 ye add karo */
+        position: relative;
+        z-index: 1;
+        width: 100px;
+        height: 100px;
+        border: 3px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 3px solid #f70b0b;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+        left: 32%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("conform");
+        const successMessage = document.getElementById("successMessage");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent default submission (for demo or AJAX)
+
+            // Simulate success - Replace this block with your AJAX call or actual form logic
+            setTimeout(() => {
+                form.reset(); // Clear form
+                successMessage.style.display = "block"; // Show success
+                window.scrollTo({
+                    top: form.offsetTop - 100,
+                    behavior: "smooth"
+                });
+
+                setTimeout(() => {
+                    successMessage.style.display = "none"; // Hide after 5s
+                }, 5000);
+            }, 500); // Simulate delay
+        });
+    });
+</script>

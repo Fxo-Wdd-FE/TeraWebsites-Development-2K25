@@ -43,7 +43,7 @@
             <div class="row">
                 <div class="col-lg-8 pe-lg-3">
                     <div class="responsive-images41 rounded-4 mb-4">
-                        <img src="/assets/images/it.jpg" class="rounded-4" />
+                        <img class="img-fluid" src="/assets/images/english-diploma.png" alt="English Diploma Course">
                     </div>
                     <h2 class="fs-3 text-body">
                         Programme Overview
@@ -60,32 +60,7 @@
                         Learners can choose between standalone professional unit certificates or the full diploma, providing flexibility to suit their lifestyle and career goals.
 
                     </p>*@
-                    <h3 class="fs-3 text-body mb-3">
-                        Entry Requirements
-
-                    </h3>
-                    <div class="bg-light rounded-3 p-4 mb-4 ">
-                        <h6>Route 1: Academic</h6>
-                        <p>A relevant honours degree (or equivalent) from a recognized university.</p>
-
-                        <h6>Route 2: Combined</h6>
-                        <p>A non-relevant honours degree (or equivalent) from a recognized university PLUS three years of management experience in a relevant area.</p>
-
-                        <h6>Route 3: Work Experience</h6>
-                        <p>Five years of work experience in a relevant industry or role.</p>
-
-                        <h6>English Language Requirements</h6>
-                        <p>IELTS score of 6.5 (or equivalent) for applicants without prior qualifications taught and assessed in English.</p>
-
-                    </div>
-                    <h3 class="fs-3 text-body mb-3">
-                        Programme Structure
-                    </h3>
-                    <p >
-                        The L7DBM consists of 6 units (20 credits each), equating to a total of 120 credits. Alternatively, learners can take individual units as professional unit certificates.
-
-
-                    </p>
+                    @Html.Raw(Model.Course?.LongDescription)
                 </div>
 
 

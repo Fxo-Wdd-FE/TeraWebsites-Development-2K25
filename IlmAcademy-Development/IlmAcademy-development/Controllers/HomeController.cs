@@ -164,7 +164,11 @@ namespace IlmAcademy.Controllers
         [Route("contact-us")]
         public IActionResult Contact()
         {
-            return View();
+            var res = integrationRepo.GetIntegrationSettings(PagesViewModel.CRMUrl, PagesViewModel.CompanyCode, "key", PagesViewModel.IntegrationId);
+            vm.Products = res.Products;
+            vm.OpportunityTypes = res.OpportunityTypes;
+            vm.Countries = res.Countries;
+            return View(vm);
         }
         [Route("courses")]
         public IActionResult Courses()
@@ -203,7 +207,7 @@ namespace IlmAcademy.Controllers
             return View("_PartialFormConfirmation", model);
         }
         [Route("study-abroad")]
-        public IActionResult IndianStudents()
+        public IActionResult StudyAbroad()
         {
             var res = _contentRepository.GetWebsiteContentByContentSlug(vm, "study-abroad-9322");
             var des = _contentRepository.GetWebsiteContentByContentSlug(vm, "programs-destinations-5859");
