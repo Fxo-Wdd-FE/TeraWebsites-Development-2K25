@@ -195,7 +195,7 @@
                             <tbody>
                                 <tr>
                                     <td>Father Name: <span class="fw-bold"> @Model.StudentApplication.FatherName</span></td>
-                                    <td>Father CNIC : <span class="fw-bold"> @Model.StudentApplication.FatherNic</span></td>
+                                    @* <td>Father CNIC : <span class="fw-bold"> @Model.StudentApplication.FatherNic</span></td> *@
                                     <td>Father Mobile : <span class="fw-bold"> @Model.StudentApplication.FatherMobileNumber</span></td>
                                 </tr>
                                 <tr>
@@ -395,6 +395,6 @@
         });
     });
         $(document).on("click", "#okBtn", function(){
-        window.location.href = "/application-submited-success"; 
+        window.location.href = "/"; 
     });
 </script>
