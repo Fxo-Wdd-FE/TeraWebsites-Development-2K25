@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using AWT_CRM_Repo.ViewModels;
 using AWT_Theme.Repository;
+using EmailServices.Repository;
+using EmailServices.ViewModal;
 using IlmAcademy.Models;
 using IlmAcademy.Repository;
 using IlmAcademy.ViewModels;
@@ -16,17 +18,30 @@ namespace IlmAcademy.Controllers
         private readonly WebsiteSettingRepository websiteSettingRepository;
         private readonly CRMIntegrationRepo integrationRepo;
         private readonly CourseRepo _course;
+        private readonly EmailService _emailService;
+
         PagesViewModel vm = new PagesViewModel();
         EmailVM emailVM = new EmailVM();
-        public HomeController(ILogger<HomeController> logger, IConfiguration config, ContentRepository content, WebsiteSettingRepository websiteSettingRepository)
+        MainVm mvm = new MainVm();
+
+        // ✅ Constructor with EmailService injected
+        public HomeController(
+            ILogger<HomeController> logger,
+            IConfiguration config,
+            ContentRepository content,
+            WebsiteSettingRepository websiteSettingRepository,
+            EmailService emailService) 
         {
             _logger = logger;
             _config = config;
+            _emailService = emailService; // assign to private field
+
             PagesViewModel.Theme = _config.GetValue<string>("WebsiteSettings:Theme");
             _contentRepository = new ContentRepository(_config);
             integrationRepo = new CRMIntegrationRepo();
             _course = new CourseRepo(_config);
-            websiteSettingRepository = new WebsiteSettingRepository(_config);
+            this.websiteSettingRepository = new WebsiteSettingRepository(_config);
+
             vm.websiteId = _config.GetValue<int>("WebsiteSettings:WebsiteId");
             PagesViewModel.CMSApiUrl = _config.GetValue<string>("WebsiteSettings:CMSAPIUrl");
             PagesViewModel.Theme = _config.GetValue<string>("WebsiteSettings:Theme");
@@ -40,20 +55,22 @@ namespace IlmAcademy.Controllers
             PagesViewModel.CRMUrl = _config.GetValue<string>("WebsiteSettings:CRMUrl");
             PagesViewModel.CompanyCode = _config.GetValue<string>("WebsiteSettings:CompanyCode");
             PagesViewModel.AcademyApi = _config.GetValue<string>("WebsiteSettings:AcademyApi");
+
             var websiteId = _config.GetValue<string>("AppData:WebsiteId");
             var apiUrl = _config.GetValue<string>("AppData:ApiUrl");
-            PagesViewModel.CRMUrl = _config.GetValue<string>("WebsiteSettings:CRMUrl");
-            if (PagesViewModel.websiteSettingsValue == null || PagesViewModel.websiteSettingsValue?.WebsiteSettingId == null || PagesViewModel.websiteSettingsOtherValue == null)
+
+            if (PagesViewModel.websiteSettingsValue == null ||
+                PagesViewModel.websiteSettingsValue?.WebsiteSettingId == null ||
+                PagesViewModel.websiteSettingsOtherValue == null)
             {
-                var res = websiteSettingRepository.GetWebsiteSettings(vm);
-                var ores = websiteSettingRepository.GetWebsiteOtherSettings(vm);
+                var res = this.websiteSettingRepository.GetWebsiteSettings(vm);
+                var ores = this.websiteSettingRepository.GetWebsiteOtherSettings(vm);
                 if (res.statusCode.Equals("200"))
                 {
                     PagesViewModel.websiteSettingsValue = res.websiteSetting;
                     PagesViewModel.websiteSettingsOtherValue = ores.websiteOtherSettings;
                 }
             }
-
         }
         public IActionResult Index()
         {
@@ -200,7 +217,6 @@ namespace IlmAcademy.Controllers
             return View(vm);
         }
 
-
         [HttpPost]
         [Route("insert-profile-data")]
         public async Task<IActionResult> InsertProfileData([FromForm] StudentProfileVm model)
@@ -208,6 +224,7 @@ namespace IlmAcademy.Controllers
             if (model == null)
                 return BadRequest("Student data is null");
 
+            // Photo handling code remains commented
             //if (model.Photo != null && model.Photo.Length > 0)
             //{
             //    using var ms = new MemoryStream();
@@ -219,9 +236,39 @@ namespace IlmAcademy.Controllers
             //    model.PhotoBytes = Convert.FromBase64String(model.PhotoBase64);
             //}
 
-            var inserted = _course.InsertStudentProfile(model);
+            // Prepare email data with model info
+            string to = "rizwan.jabbar@futruesol.net"; // replace with actual recipient
+            string subject = "Profile Submission";
+
+            // Build email body using model data
+            string body = $@"
+        A new student profile has been submitted.<br/><br/>
+        <b>Name:</b> {model.StudentName}<br/>
+        <b>Email:</b> {model.Email}<br/>
+        <b>Phone:</b> {model.PhoneNo}<br/>
+        <b>Course:</b> {model.FatherName}<br/>
+        <b>Additional Info:</b> {model.FatherMobileNumber}<br/>
+    ";
+
+            try
+            {
+                // Use EmailService to send email
+                var res = _emailService.SendEmailWOTs(to, subject, body);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error sending email");
+                // optionally, you can handle failure gracefully
+            }
+
+            // Insert student profile
+            //var inserted = _course.InsertStudentProfile(model);
+            var inserted = "other";
+
             return Ok(inserted);
         }
+
+
         //[HttpPost]
         //[Route("insert-profile-data")]
         //public async Task<IActionResult> InsertProfileData([FromForm] StudentProfileVm model)
