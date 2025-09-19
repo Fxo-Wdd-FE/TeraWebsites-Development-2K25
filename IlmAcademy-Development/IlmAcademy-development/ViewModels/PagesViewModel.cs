@@ -181,6 +181,7 @@ namespace IlmAcademy.ViewModels
         public string? ShortName { get; set; }
         public string? BranchId { get; set; }
         public int? Avtive { get; set; }
+        public byte[]? Image { get; set; }
     }
     public class EmailVM
     {
