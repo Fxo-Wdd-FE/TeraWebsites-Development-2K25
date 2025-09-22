@@ -3,6 +3,10 @@
 @{
     var serial = 1;
     var colors = new[] { "color-one", "color-two", "color-three" };
+    ViewBag.Title = Html.Raw(Model?.ContentTypeSlug?.Title);
+    ViewBag.MetaDescription = Html.Raw(Model?.ContentTypeSlug?.MetaDescription);
+    ViewBag.MetaKeywords = Html.Raw(Model?.ContentTypeSlug?.MetaKeywords);
+    ViewBag.OgImage = Model?.ContentTypeSlug?.ImageSource;
 }
 <div class="site-wrapper-reveal">
     <div class="breadcrumb-area" style="background:url(@PagesViewModel.ContentUrl/@Model.ContentTypeSlug?.ImageSource) no-repeat top; background-size:cover; z-index:2">

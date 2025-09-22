@@ -2,42 +2,57 @@
 @using Microsoft.AspNetCore.Http.Extensions
 @model PagesViewModel
 @{
-    var GetUrl = Context.Request.GetDisplayUrl();
+    var twit = PagesViewModel.websiteSettingsOtherValue?.Where(x => x.Name == "Twitter").FirstOrDefault();
+    var pakContact = PagesViewModel.websiteSettingsOtherValue?.Where(x => x.Name == "pak-contact").FirstOrDefault();
+    var ukContact = PagesViewModel.websiteSettingsOtherValue?.Where(x => x.Name == "contact-uk").FirstOrDefault();
+    var QatarContact = PagesViewModel.websiteSettingsOtherValue?.Where(x => x.Name == "qatar-number").FirstOrDefault();
+    var email = PagesViewModel.websiteSettingsOtherValue?.Where(x => x.Name == "Email").FirstOrDefault();
+    var analyticCode = PagesViewModel.websiteSettingsOtherValue?.Where(x => x.Name == "Google Analytics").FirstOrDefault();
+    var GetUrl = Context.Request?.GetDisplayUrl();
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
-
-    <!-- Fav Icon -->
-    <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
     <title>@ViewBag.Title</title>
-    <meta name="keywords" content="@ViewBag?.Keywords" />
-    <meta name="description" content="@ViewBag?.Description">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="keywords" content="@ViewBag?.MetaKeywords" />
+    <meta name="description" content="@ViewBag?.MetaDescription">
     <meta property="og:title" content="@ViewBag?.Title">
     <meta property="og:description" content="@ViewBag?.MetaDescription">
-    @* <meta property="og:image" content="@(ViewData["OgImage"] ?? PagesViewModel.ImageUrl)"> *@
-    <meta property="og:image:secure_url" content="@GetUrl" />
+    <meta property="og:image" content="@PagesViewModel.ContentUrl/@ViewBag?.OgImage">
+    <meta property="og:image:secure_url" content="@PagesViewModel.ContentUrl/@ViewBag?.OgImage" />
     <meta property="og:image:alt" content="@ViewBag?.Title">
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US">
-    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="400" />
     <meta property="og:image:height" content="400" />
-    <meta property="og:url" content="@PagesViewModel.WebsiteUrl">
-    <meta property="og:image" content="https://digitalcampus.ilm.terademos.com/assets/images/og-image.jpeg">
+    <meta property="og:url" content="@GetUrl">
+    <meta property="og:site_name" content="ILM Academy" />
     <meta property="article:publisher" content="@GetUrl" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="@ViewBag?.Title" />
     <meta name="twitter:description" content="@ViewBag?.MetaDescription" />
-   @*  <meta property="twitter:image" content="@(ViewData["OgImage"] ?? PagesViewModel.ImageUrl)"> *@
-    <meta name="twitter:image:src" content="@ViewBag?.OgImage" />
-    <meta name="twitter:site" content="https://twitter.com/mytwitter" />
-    <meta name="twitter:creator" content="@ViewBag?.Title" />
+    <meta name="twitter:image" content="@PagesViewModel.ContentUrl/@ViewBag?.OgImage" />
+    <meta name="twitter:image:src" content="@PagesViewModel.ContentUrl/@ViewBag?.OgImage" />
+    <meta name="twitter:site" content="@twit?.Value" />
+    <link rel="shortcut icon" href="@PagesViewModel.ContentUrl/@PagesViewModel.websiteSettingsValue?.FavIcon" />
+    <link href="@PagesViewModel.ContentUrl/@PagesViewModel.websiteSettingsValue?.FavIcon" rel="apple-touch-icon" />
+    <link href="@PagesViewModel.ContentUrl/@PagesViewModel.websiteSettingsValue?.FavIcon" rel="apple-touch-icon" sizes="144x144" />
+    <meta property="og:site_name" content="ILM Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+
+    <link rel="stylesheet" href="~/assets/css/vendor/vendor.min.css">
+    <link rel="stylesheet" href="~/assets/css/plugins/plugins.min.css">
+
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link href="~/assets/css/newsletterloader.css" rel="stylesheet" />
+    <link href="~/assets/css/all.min.css" rel="stylesheet" />
+
+
     <link rel="canonical" href="@((ViewData["Canonical"] ?? $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}"))">
 
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -46,13 +61,6 @@
 
     <!-- Vendor & Plugins CSS (Please remove the comment from below vendor.min.css & plugins.min.css for better website load performance and remove css files from avobe) -->
 
-    <link rel="stylesheet" href="~/assets/css/vendor/vendor.min.css">
-    <link rel="stylesheet" href="~/assets/css/plugins/plugins.min.css">
-	
-    <!-- Main Style CSS -->
-     <link rel="stylesheet" href="~/assets/css/style.css"> 
-    <link href="~/assets/css/newsletterloader.css" rel="stylesheet" />
-    <link href="~/assets/css/all.min.css" rel="stylesheet" />
 
 </head>
 <body>

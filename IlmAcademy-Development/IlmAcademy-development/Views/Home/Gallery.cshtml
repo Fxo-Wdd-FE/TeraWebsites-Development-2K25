@@ -2,6 +2,12 @@
 @model PagesViewModel
 @{
     var Layout = "/Views/Shared/_Layout.cshtml";
+  
+    ViewBag.Title = Html.Raw(Model?.ContentTypeSlug?.Title);
+    ViewBag.MetaDescription = Html.Raw(Model?.ContentTypeSlug?.MetaDescription);
+    ViewBag.MetaKeywords = Html.Raw(Model?.ContentTypeSlug?.MetaKeywords);
+    ViewBag.OgImage = Model?.ContentTypeSlug?.ImageSource;
+
 }
 <style>
     /* Wrap gallery in a container */

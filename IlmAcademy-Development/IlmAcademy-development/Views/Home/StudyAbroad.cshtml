@@ -1,11 +1,12 @@
 ﻿@using IlmAcademy.ViewModels
 @model PagesViewModel
 @{
-    // Set dynamic metadata for the page
-    ViewData["Title"] = "Study Abroad Programs for Indian Students | ILM Academy";
-    ViewData["Description"] = "Your global journey starts here with ILM Academy. Affordable study abroad programs for Indian students with admission support, visa guidance, scholarships, and pre-departure training.";
-    ViewData["Keywords"] = "Study Abroad, ILM Academy, Indian students, UK, Canada, Australia, USA, Europe, visa guidance, scholarships, international education";
+    ViewBag.Title = Html.Raw(Model?.ContentTypeSlug?.Title);
+    ViewBag.MetaDescription = Html.Raw(Model?.ContentTypeSlug?.MetaDescription);
+    ViewBag.MetaKeywords = Html.Raw(Model?.ContentTypeSlug?.MetaKeywords);
+    ViewBag.OgImage = Model?.ContentTypeSlug?.ImageSource;
 }
+
 
 <div class="site-wrapper-reveal">
 

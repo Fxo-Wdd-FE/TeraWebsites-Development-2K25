@@ -2,7 +2,10 @@
 @model PagesViewModel
 
 @{
-    
+    ViewBag.Title = Html.Raw(Model?.ContentTypeSlug?.Title);
+    ViewBag.MetaDescription = Html.Raw(Model?.ContentTypeSlug?.MetaDescription);
+    ViewBag.MetaKeywords = Html.Raw(Model?.ContentTypeSlug?.MetaKeywords);
+    ViewBag.OgImage = Model?.ContentTypeSlug?.ImageSource;
     Layout = "/Views/Shared/_LayoutTwo.cshtml";
 }
 <div class="site-wrapper-reveal">

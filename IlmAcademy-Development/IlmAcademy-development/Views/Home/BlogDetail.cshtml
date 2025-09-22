@@ -1,13 +1,12 @@
 ﻿@using IlmAcademy.ViewModels
 @model PagesViewModel
-@* @{
-    ViewBag.Title = "Blog Detail, Talent Nurtures, Nurturing The Gen-Next!";
-    ViewBag.MetaDescription = "Talent Nurture offers globally recognized online programs, professional diplomas, and certifications designed for career growth, job promotions, and international opportunities.";
-    ViewBag.MetaKeywords = "online education, professional diploma, career development, global certification, job promotions, distance learning, skill-based courses, Talent Nurture, affordable programs, international career opportunities";
-    ViewBag.OgImage = "https://talentnurtures2.mysitedemo.us/assets/images/talent-nurtures.jpg"; 
-    // <-- Update with actual image path
+@{
+    ViewBag.Title = Html.Raw(Model?.ContentTypeSlug?.Title);
+    ViewBag.MetaDescription = Html.Raw(Model?.ContentTypeSlug?.MetaDescription);
+    ViewBag.MetaKeywords = Html.Raw(Model?.ContentTypeSlug?.MetaKeywords);
+    ViewBag.OgImage = Model?.ContentTypeSlug?.ImageSource;
 }
- *@
+
 
 <div class="site-wrapper-reveal">
     <div class="breadcrumb-area" style="background:url(/assets/images/slidebg3.jpg) no-repeat top; background-size:cover; z-index:2; padding-top:45px">
