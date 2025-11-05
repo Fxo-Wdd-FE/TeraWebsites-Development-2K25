@@ -14,13 +14,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta name="keywords" content="@ViewBag?.MetaKeywords" />
     <meta name="description" content="@ViewBag?.MetaDescription">
     <meta property="og:title" content="@ViewBag?.Title">
     <meta property="og:description" content="@ViewBag?.MetaDescription">
-    <meta property="og:image" content="@PagesViewModel.ContentUrl/@ViewBag?.OgImage">
+    <meta property="og:image" content="https://digitalcampus.ilm.terademos.com/assets/images/og-image.jpeg">
     <meta property="og:image:secure_url" content="@PagesViewModel.ContentUrl/@ViewBag?.OgImage" />
     <meta property="og:image:alt" content="@ViewBag?.Title">
     <meta property="og:type" content="website" />
@@ -32,35 +34,22 @@
     <meta property="article:publisher" content="@GetUrl" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:description" content="@ViewBag?.MetaDescription" />
-    <meta name="twitter:image" content="@PagesViewModel.ContentUrl/@ViewBag?.OgImage" />
-    <meta name="twitter:image:src" content="@PagesViewModel.ContentUrl/@ViewBag?.OgImage" />
-    <meta name="twitter:site" content="@twit?.Value" />
-    <link rel="shortcut icon" href="@PagesViewModel.ContentUrl/@PagesViewModel.websiteSettingsValue?.FavIcon" />
-    <link href="@PagesViewModel.ContentUrl/@PagesViewModel.websiteSettingsValue?.FavIcon" rel="apple-touch-icon" />
-    <link href="@PagesViewModel.ContentUrl/@PagesViewModel.websiteSettingsValue?.FavIcon" rel="apple-touch-icon" sizes="144x144" />
+    <meta name="twitter:image" content="https://digitalcampus.ilm.terademos.com/assets/images/og-image.jpeg" />
+    <meta name="twitter:image:src" content="https://digitalcampus.ilm.terademos.com/assets/images/og-image.jpeg" />
     <meta property="og:site_name" content="ILM Academy">
     <meta name="twitter:card" content="summary">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
-
-
     <link rel="stylesheet" href="~/assets/css/vendor/vendor.min.css">
     <link rel="stylesheet" href="~/assets/css/plugins/plugins.min.css">
-
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="~/assets/css/style.css">
     <link href="~/assets/css/newsletterloader.css" rel="stylesheet" />
     <link href="~/assets/css/all.min.css" rel="stylesheet" />
-
-
     <link rel="canonical" href="@((ViewData["Canonical"] ?? $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}"))">
-
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-
-    <!-- Vendor & Plugins CSS (Please remove the comment from below vendor.min.css & plugins.min.css for better website load performance and remove css files from avobe) -->
-
 
 </head>
 <body>
