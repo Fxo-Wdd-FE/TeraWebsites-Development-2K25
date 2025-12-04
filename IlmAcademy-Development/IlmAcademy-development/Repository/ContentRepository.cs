@@ -25,7 +25,7 @@ namespace IlmAcademy.Repository
             if (string.IsNullOrEmpty(apiResponse.ResponseString))
             {
                 var rd = new WebsiteContentResponseVM()
-                {
+                {   
                     Status = apiResponse.Status,
                     statusCode = apiResponse.StatusCode,
                     Message = apiResponse.Message,

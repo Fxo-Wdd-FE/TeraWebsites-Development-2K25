@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+﻿using Anyweb;
 using AWT_CRM_Repo.ViewModels;
 using AWT_Theme.Repository;
 using EmailServices.Repository;
@@ -7,6 +7,7 @@ using IlmAcademy.Models;
 using IlmAcademy.Repository;
 using IlmAcademy.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace IlmAcademy.Controllers
 {
@@ -77,12 +78,17 @@ namespace IlmAcademy.Controllers
             var i = _contentRepository.GetWebsiteContentByContentSlug(vm, "home-page-3107");
             var ii = _contentRepository.GetWebsiteContentByContentTypeAndSlug(vm, "Features", "features");
             var res = _contentRepository.GetWebsiteContentByContentSlug(vm, "why-choose-ilm-academy-2219");
-            
-            vm.MiscData = res.contentItem;
-            vm.ContentTypeSlug = i.contentItem;
-            vm.ContentTypeSlugs = ii.contentItems;
+
+            // Assign safe fallback of correct type
+            vm.ContentTypeSlug = i?.contentItem ?? new ContentVm();
+            vm.ContentTypeSlugs = ii?.contentItems ?? new List<ContentVm>();
+            vm.MiscData = res?.contentItem ?? new ContentVm();
+
             return View(vm);
         }
+
+
+
 
         [Route("about-us")]
         public IActionResult About()
@@ -325,7 +331,11 @@ namespace IlmAcademy.Controllers
 
         }
 
-
+        //[Route("privacy-policy")]
+        //public IActionResult PrivacyPolicy()
+        //{
+        //    return View();
+        //}
 
         [Route("courses/english-diploma")]
         public IActionResult CourseDiplomaInEnglish()

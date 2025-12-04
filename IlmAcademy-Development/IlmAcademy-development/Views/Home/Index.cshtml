@@ -39,15 +39,25 @@
                 <!--baseline-->
                 <div class="col-lg-7 col-md-11 mt-auto mb-auto">
                     <div class="machine-learning-hero-text wow move-up animated " >
-                        @Html.Raw(Model.ContentTypeSlug.CustomFields?.FirstOrDefault(x => x.Description == "Title").Value)
+                        
+                      @Html.Raw(Model?.ContentTypeSlug?.CustomFields?
+    .FirstOrDefault(x => x.Description == "Title")?.Value ?? "")
+
                         <p class="text-white ">
-                            @Html.Raw(Model.ContentTypeSlug.CustomFields?.FirstOrDefault(x => x.Description == "Short Description").Value)
+@Html.Raw(Model?.ContentTypeSlug?.CustomFields?
+    .FirstOrDefault(x => x.Description == "Short Description")?.Value ?? "")
 
                         </p>
                         <div class="col-12 mb-5">
                             <div class="feature-images__two small-mt__10 mt-4">
                                 <div class="modern-grid-image-box row gy-3">
-                                     @foreach (var feature in Model.ContentTypeSlugs)
+                                    @if (Model.ContentTypeSlugs == null || Model.ContentTypeSlugs.Count() == 0)
+                                    {
+                                        <p>No Data Found</p>
+                                    }
+                                    else
+                                    {
+                                        @foreach (var feature in Model.ContentTypeSlugs)
                                     {
                                         <div class="single-item col-lg-4 col-md-6 position-relative">
                                             <a href="/courses" class="ht-box-images style-02 h-100 shadow">
@@ -68,7 +78,10 @@
                                             </a>
                                         </div>
                                     } 
-                                </div>
+   
+                                    }
+                                    
+                                                                 </div>
                             </div>
 
                         </div>
@@ -107,7 +120,13 @@
                     <div class="brand-logo-slider__container-area">
                         <div class="swiper-container brand-logo-slider__container">
                             <div class="swiper-wrapper brand-logo-slider__one">
-                                @foreach (var logo in Model.ContentTypeSlug.contentPhotos)
+                                @if (Model.ContentTypeSlug.contentPhotos == null || Model.ContentTypeSlug.contentPhotos.Count() == 0)
+                                {
+                                    <p>No Data Found</p>
+                                }
+                                else
+                                {
+                                            @foreach (var logo in Model.ContentTypeSlug.contentPhotos)
                                 {
                                     <div class="swiper-slide brand-logo brand-logo--slider">
                                         <a>
@@ -117,7 +136,7 @@
                                         </a>
                                     </div>
                                 }
-
+                                }
                             </div>
                         </div>
                     </div>
@@ -128,7 +147,7 @@
 
 
 
-        }
+    
 
 
 
@@ -143,45 +162,85 @@
         <div class="container">
 
             <div class="row">
-                @foreach (var why in Model.ContentTypeSlug.linkedContentItems)
+                @if (Model?.ContentTypeSlug?.linkedContentItems != null &&
+                                Model.ContentTypeSlug.linkedContentItems.Any())
                 {
-                    <div class="col-lg-10 m-auto">
-                        <div class="section-title-wrap text-center section-space--mb_30">
-                            <h6 class="section-sub-title mb-20">
-                                @why.contentTitle
-                            </h6>
-                            <h3 class="heading mb-4">
-                                @Html.Raw(why.description)
-
-                            </h3>
-                            <p class="fs-5">
-                                @Html.Raw(why.otherDescription)
-                            </p>
-                        </div>
-                    </div>
-                }
-                <div class="col-lg-12">
-                    <div class="claim-grid-group">
-                        @foreach (var other in Model.MiscData?.ChildContent)
+                    @foreach (var why in Model.ContentTypeSlug.linkedContentItems)
+                    {
+                        if (why != null)
                         {
-                            var currentColor = colors[(serial - 1) % colors.Length]; 
+                            <div class="col-lg-10 m-auto">
+                                <div class="section-title-wrap text-center section-space--mb_30">
 
-                            <div class="ht-box-icon style-04">
-                                <div class="icon-box-wrap @currentColor">
-                                    <div class="icon">
-                                        <span class="icon-basic-book"></span>
-                                    </div>
-                                    <div class="content">
-                                        <h6 class="sub-heading">@serial.ToString("D2")</h6>
-                                        <h5 class="heading">@other.Title</h5>
-                                        <p class="mb-0">@other.Description</p>
-                                    </div>
+                                    <h6 class="section-sub-title mb-20">
+                                        @(string.IsNullOrEmpty(why.contentTitle) ? "" : why.contentTitle)
+                                    </h6>
+
+                                    <h3 class="heading mb-4">
+                                        @Html.Raw(string.IsNullOrEmpty(why.description) ? "" : why.description)
+                                    </h3>
+
+                                    <p class="fs-5">
+                                        @Html.Raw(string.IsNullOrEmpty(why.otherDescription) ? "" : why.otherDescription)
+                                    </p>
+
                                 </div>
                             </div>
-
-                            serial++; 
                         }
+                        else
+                        {
+                            <p class="text-danger text-center">Error loading content item.</p>
+                        }
+                    }
+                }
+                else
+                {
+                    <p class="text-center text-muted">No content available.</p>
+                }
 
+                <div class="col-lg-12">
+                    <div class="claim-grid-group">
+                        @if (Model?.MiscData?.ChildContent != null && Model.MiscData.ChildContent.Any())
+                        {
+                            foreach (var other in Model.MiscData.ChildContent)
+                            {
+                                if (other != null)
+                                {
+                                    var currentColor = colors != null && colors.Length > 0
+                                    ? colors[(serial - 1) % colors.Length]
+                                    : ""; // fallback if colors array is empty or null
+
+                                    <div class="ht-box-icon style-04">
+                                        <div class="icon-box-wrap @currentColor">
+                                            <div class="icon">
+                                                <span class="icon-basic-book"></span>
+                                            </div>
+                                            <div class="content">
+                                                <h6 class="sub-heading">@serial.ToString("D2")</h6>
+
+                                                <h5 class="heading">
+                                                    @(string.IsNullOrEmpty(other.Title) ? "" : other.Title)
+                                                </h5>
+
+                                                <p class="mb-0">
+                                                    @(string.IsNullOrEmpty(other.Description) ? "" : other.Description)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    serial++;
+                                }
+                                else
+                                {
+                                    <p class="text-danger">Error: Invalid content item.</p>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <p class="text-muted">No content available.</p>
+                        }
 
 
                     </div>
