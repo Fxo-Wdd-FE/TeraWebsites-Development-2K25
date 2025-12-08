@@ -331,11 +331,11 @@ namespace IlmAcademy.Controllers
 
         }
 
-        //[Route("privacy-policy")]
-        //public IActionResult PrivacyPolicy()
-        //{
-        //    return View();
-        //}
+        [Route("privacy-policy")]
+        public IActionResult PrivacyPolicy()
+        {
+            return View();
+        }
 
         [Route("courses/english-diploma")]
         public IActionResult CourseDiplomaInEnglish()
